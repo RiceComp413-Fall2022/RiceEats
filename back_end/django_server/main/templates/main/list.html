@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+View List
+{% endblock %}
+
+{% block content %}
+    <h1>{{ls.name}}</h1>
+    {% for reviewitem in ls.reviewitem_set.all %}
+        {% if reviewitem.complete == True %}    
+            <li>{{reviewitem.text}} - Done</li>
+        {% else %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
