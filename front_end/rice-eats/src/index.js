@@ -1,13 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import LandingPage from './pages/LandingPage'
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/south",
+    element: <div>south</div>,
+  },
+  {
+    path: "/north",
+    element: <div>north</div>,
+  },
+  {
+    path: "/west",
+    element: <div>west</div>,
+  },
+  {
+    path: "/seibel",
+    element: <div>seibel</div>,
+  },
+  {
+    path: "/baker",
+    element: <div>baker</div>,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
