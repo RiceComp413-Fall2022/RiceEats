@@ -19,3 +19,13 @@ def v1(response):
 
 def home(response):
     return render(response, "main/home.html", {})
+
+def add(response):
+
+    val1 = response.POST["num1"]
+    val2 = response.POST["num2"]
+    try:
+        res = int(val1) + int(val2)
+    except:
+        res = please 
+    return render(response, 'main/result.html', {'result': res})
