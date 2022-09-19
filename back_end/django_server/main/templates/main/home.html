@@ -16,4 +16,13 @@ HomePage RiceEats
     <input type="submit">
 </form>
 
+<form action="add2" method='post'>
+
+    {% csrf_token %}
+
+    Enter 1st number: <input type="text" name = "num1"><br>
+    Enter 2nd number: <input type="text" name = "num2"><br>
+    <input type="submit">
+</form>
+
 {% endblock %}
