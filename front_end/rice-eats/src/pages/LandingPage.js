@@ -7,7 +7,7 @@ export default function LandingPage() {
   return (
     <div>
       {menus.map((servery) => (
-        <ServeryCard />
+        <ServeryCard name={servery.name} overallRating={servery.overallRating} menuItems={servery.menuItems}/>
       ))}
     </div>
   );
