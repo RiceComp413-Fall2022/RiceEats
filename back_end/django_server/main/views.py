@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import FullReview, ReviewItem
+from .models import Reviewer, Servery, MenuItem, MealType,FullReview, ReviewItem, Reviewer, Servery, MenuItem, MealType, Meal, MenuItemServed
+from django.core import serializers
+import json
 
 # Create your views here.
 def index(response, id):
@@ -41,4 +43,48 @@ def add2(response):
         'val2': val2,
         'sum': res
     }
+    return JsonResponse(data)
+
+
+def serveryMenus(response):
+    # return the servery menus from the FoodServed Model
+    mydata = list(MenuItemServed.objects.all().values())
+
+    serveryDict = {}
+    for entry in mydata:
+        menuItemId = entry['menuItem_id']
+        menuItemInfo = MenuItem.objects.get(pk=menuItemId)
+        mealId = entry['meal_id']
+        mealInfo = Meal.objects.get(pk=mealId)
+        servery = mealInfo.servery.name
+        
+        
+        serialized_obj = serializers.serialize('json', [ menuItemInfo, ])
+        dct = json.loads(serialized_obj)
+
+        # add the menuItem object into its respective servery
+        if servery not in serveryDict:
+            serveryDict[servery] = []
+        serveryDict[servery].append(dct[0]['fields'])
+    
+    return JsonResponse(serveryDict, safe = False)
+
+def submitReview(response):
+    val1 = response.POST["reviewId"]
+    val2 = response.POST["foodId"]
+    val3 = response.POST["score"]
+    val4 = response.POST["comments"]
+
+    data = {
+        'reviewId': val1,
+        'foodId': val2,
+        'score': val3,
+        'comments': val4
+    }
+    
+    # save a review item instance into the database
+
+
+    # save a fullreview instance into the database
+
     return JsonResponse(data)
