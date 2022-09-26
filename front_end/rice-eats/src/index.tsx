@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 
 const router = createBrowserRouter([

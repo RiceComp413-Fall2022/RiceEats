@@ -1,0 +1,5 @@
+- install stylex
+- add type definitions for props
+- check out other component libraries
+- do front page styling
+- choose an icon library
