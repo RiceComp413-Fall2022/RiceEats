@@ -1,9 +1,8 @@
 import axios from "axios";
 
 export function RetrieveMenus() {
-    return [
-        {
-            name: "South",
+    return {
+        south: {
             overallRating: 4.3,
             menuItems: [
                 {
@@ -16,8 +15,7 @@ export function RetrieveMenus() {
                 },
             ]
         },
-        {
-            name: "west",
+        west: {
             overallRating: 3.3,
             menuItems: [
                 {
@@ -30,8 +28,7 @@ export function RetrieveMenus() {
                 },
             ]
         },
-        {
-            name: "north",
+        north: {
             overallRating: 1.3,
             menuItems: [
                 {
@@ -44,5 +41,31 @@ export function RetrieveMenus() {
                 },
             ]
         },
-    ]
+        seibel: {
+            overallRating: 1.3,
+            menuItems: [
+                {
+                    name: "Meatloaf",
+                    rating: 3.2
+                }, 
+                {
+                    name: "Lasagna",
+                    rating: 4.8
+                },
+            ]
+        },
+        baker: {
+            overallRating: 1.3,
+            menuItems: [
+                {
+                    name: "Meatloaf",
+                    rating: 3.2
+                }, 
+                {
+                    name: "Lasagna",
+                    rating: 4.8
+                },
+            ]
+        },
+    }
 }
