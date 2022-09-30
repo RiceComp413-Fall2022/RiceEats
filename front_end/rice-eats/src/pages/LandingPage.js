@@ -1,41 +1,36 @@
 import React from 'react';
+
+import { RetrieveMenus } from '../utils/APICalls';
+import { serveryList, serveryName, serveryUrl, serveryColor } from '../config/config';
+
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
 import CurrentMeal from '../components/CurrentMeal';
-import { RetrieveMenus } from '../utils/APICalls';
 
 export default function LandingPage() {
   const menus = RetrieveMenus();
   return (
-    <div>
+    <div style={{
+      marginLeft: "15%",
+      marginRight: "15%"
+    }}>
       <TopBar style={{marginBottom: 15}}/>
-      <CurrentMeal style={{marginBottom: 30}}/>
-      <div style={{display: "grid", gridTemplateColumns:"1fr 1fr 1fr", rowGap: 15}}>
-        <ServeryCard 
-          name="South" 
-          overallRating={menus.south.overallRating} 
-          menuItems={menus.south.menuItems} 
-          url="/south"/>
-        <ServeryCard
-          name="West" 
-          overallRating={menus.west.overallRating} 
-          menuItems={menus.west.menuItems}
-          url="/west"/>
-        <ServeryCard 
-          name="North" 
-          overallRating={menus.north.overallRating} 
-          menuItems={menus.north.menuItems}
-          url="/north"/>
-        <ServeryCard 
-          name="Seibel" 
-          overallRating={menus.seibel.overallRating} 
-          menuItems={menus.seibel.menuItems}
-          url="/seibel"/>
-        <ServeryCard 
-          name="Baker" 
-          overallRating={menus.baker.overallRating} 
-          menuItems={menus.baker.menuItems}
-          url="/baker"/>
+      <div style={{marginBottom: 20}}>
+        <CurrentMeal />
+      </div>
+      <div style={{
+        display: "grid", 
+        gridTemplateColumns:"1fr 1fr 1fr", 
+        rowGap: 15, 
+        columnGap: 15
+      }}>
+        {serveryList.map(servery => (
+          <ServeryCard
+            name={serveryName[servery]}
+            overallRating={menus[servery].overallRating}
+            menuItems={menus[servery].menuItems}
+            url={serveryUrl[servery]} />
+        ))}
       </div>
     </div>
   );

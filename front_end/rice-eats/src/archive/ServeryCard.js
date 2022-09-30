@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from "./Card"
+import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -18,20 +18,22 @@ export default function ServeryCard(props) {
   const name = props.name;
   const overallRating = props.overallRating;
   const menuItems = props.menuItems;
-  const backgroundColor = props.backgroundColor;
   const url = props.url;
   const navigate = useNavigate();
   const onButtonClick = () => {
     navigate(url);
   }
   return (
-    <Card onClick={onButtonClick} backgroundColor={backgroundColor}>
-      <div style={{
-        fontWeight: "bold"
-      }}>{name} ({overallRating}⭐)</div>
-      <div>
-        {menuItems.map((menuItem) => MenuItem(menuItem))}
-      </div>
+    <Card style={{ width: '18rem' }}>
+      <Card.Body>
+        <Card.Title>{name} ({overallRating})</Card.Title>
+        <Card.Text>
+          <div>
+            {menuItems.map((menuItem) => MenuItem(menuItem))}
+          </div>
+        </Card.Text>
+        <Button variant="primary" onClick={onButtonClick}>See More Details</Button>
+      </Card.Body>
     </Card>
   );
 }

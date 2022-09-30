@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import LandingPage from './pages/LandingPage'
-import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
   createBrowserRouter,
@@ -10,29 +7,35 @@ import {
   Route,
 } from "react-router-dom";
 
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import { serveryUrl } from './config/config';
+
+import LandingPage from './pages/LandingPage';
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
   },
   {
-    path: "/south",
+    path: serveryUrl.south,
     element: <div>south</div>,
   },
   {
-    path: "/north",
+    path: serveryUrl.north,
     element: <div>north</div>,
   },
   {
-    path: "/west",
+    path: serveryUrl.west,
     element: <div>west</div>,
   },
   {
-    path: "/seibel",
+    path: serveryUrl.seibel,
     element: <div>seibel</div>,
   },
   {
-    path: "/baker",
+    path: serveryUrl.baker,
     element: <div>baker</div>,
   },
 ]);

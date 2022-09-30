@@ -13,6 +13,10 @@ export function RetrieveMenus() {
                     name: "Lasagna",
                     rating: 4.8
                 },
+                {
+                    name: "Lasagna",
+                    rating: 4.8
+                },
             ]
         },
         west: {
