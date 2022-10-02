@@ -8,7 +8,7 @@ export default function TopBar() {
     <div style={{
       display: "flex",
       justifyContent: "space-between",
-      height: 60,
+      height: 75,
       paddingTop: 10,
       paddingBottom: 10}}>
       {/* TODO: Add link */}
