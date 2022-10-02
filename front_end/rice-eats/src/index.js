@@ -6,6 +6,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
