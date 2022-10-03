@@ -1,5 +1,27 @@
 import axios from "axios";
 
+export function PostReview() {
+    axios.post("url", {
+        serveryName: "south",
+        date: "dateformat",
+        mealType: "breakfast",
+        itemReviews: [
+            {
+                name: "Meatloaf",
+                rating: 3,
+                comments: ""
+            }
+        ]
+    });
+}
+
+export function realRetrieveMenus() {
+    axios.post("url", {
+        date: "2022-10-01",
+        mealType: "Breakfast"
+    });
+}
+
 export function RetrieveMenus() {
     return {
         south: {

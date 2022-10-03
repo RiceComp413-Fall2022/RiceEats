@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { RetrieveMenus } from '../utils/APICalls';
-import { serveryList, serveryName, serveryUrl, serveryColor } from '../config/config';
+import { serveryList, serveryName, serveryUrl, serveryMapUrl } from '../config/config';
 
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
@@ -9,6 +9,9 @@ import MealPicker from '../components/MealPicker';
 
 export default function LandingPage() {
   const menus = RetrieveMenus();
+  const moveServeryToTop = (serveryName) => {
+    
+  };
   return (
     <div style={{
       marginLeft: "12%",
@@ -28,12 +31,15 @@ export default function LandingPage() {
         rowGap: 15, 
         columnGap: 15
       }}>
-        {serveryList.map(servery => (
+        {serveryList.map((servery, index) => (
           <ServeryCard
             name={serveryName[servery]}
             overallRating={menus[servery].overallRating}
             menuItems={menus[servery].menuItems}
-            url={serveryUrl[servery]} />
+            url={serveryUrl[servery]} 
+            mapUrl={serveryMapUrl[servery]}
+            moveToTop={() => undefined}
+            isTop={index == 0}/>
         ))}
       </div>
     </div>

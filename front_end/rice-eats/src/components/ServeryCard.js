@@ -21,12 +21,20 @@ export default function ServeryCard(props) {
   const menuItems = props.menuItems;
   const backgroundColor = props.backgroundColor;
   const url = props.url;
+  const mapUrl = props.mapUrl;
+  const moveToTop = props.moveToTop ?? (() => undefined);
+  const isTop = props.isTop;
+
   const navigate = useNavigate();
   const onButtonClick = () => {
     navigate(url);
   }
+  const onMoveToTopClick = () => {
+    navigate("https://github.com/RiceComp413-Fall2022/RiceEats");
+  }
+
   return (
-    <Card onClick={onButtonClick} backgroundColor={backgroundColor}>
+    <Card backgroundColor={backgroundColor}>
       <div style={{
         display: "flex",
         flexDirection: "column",
@@ -45,23 +53,31 @@ export default function ServeryCard(props) {
           width: "100%"
         }}>
           <div style={{marginLeft: 5, flexGrow: 2}}>
-            <Button>
+            <Button onClick={onButtonClick}>
               <Text white bold>
                 RATE NOW
               </Text>
             </Button>
           </div>
 
-          <div style={{marginLeft: 5}}>
-            <Button>
-              ^
-            </Button>
-          </div>
+          {!isTop && (
+            <div style={{marginLeft: 5}}>
+              <Button onClick={moveToTop}>
+                <Text white bold>
+                  <i class="bi bi-arrow-bar-up" />
+                </Text>
+              </Button>
+            </div>
+          )}
 
           <div style={{marginLeft: 5}}>
-            <Button>
-              ?
-            </Button>
+            <a href={mapUrl} target="_blank">
+              <Button>
+                <Text white bold>
+                  <i class="bi bi-geo-alt" />
+                </Text>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
