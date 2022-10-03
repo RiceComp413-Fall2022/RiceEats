@@ -9,12 +9,16 @@ export default function Card(props) {
     <div 
       style={{
         borderRadius: "5px",
-        backgroundColor: backgroundColor
+        backgroundColor: backgroundColor,
+        width: "100%",
+        height: "100%"
       }} 
       className="hover-shadow"
       onClick={onClick}>
       <div style={{
-        padding: "16px 16px"
+        padding: "16px 16px",
+        width: "100%",
+        height: "100%"
       }}>
         {children}
       </div>

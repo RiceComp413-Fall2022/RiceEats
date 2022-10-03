@@ -1,14 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from "./Button";
+import Text from "./Text";
 
 export default function TopBar() {
   return (
     <div style={{
       display: "flex",
-      height: 60,
+      justifyContent: "space-between",
+      height: 75,
       paddingTop: 10,
       paddingBottom: 10}}>
+      {/* TODO: Add link */}
       <img src="logo4.png"/>
-      <button>Sign In!</button>
+      <Button>
+        <Text white={true} bold={true}>
+          SIGN IN
+        </Text>
+      </Button>
     </div>
   );
 }

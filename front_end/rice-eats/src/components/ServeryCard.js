@@ -1,6 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from "./Card"
+import Button from "./Button";
+import Card from "./Card";
+import Text from "./Text";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -27,10 +28,23 @@ export default function ServeryCard(props) {
   return (
     <Card onClick={onButtonClick} backgroundColor={backgroundColor}>
       <div style={{
-        fontWeight: "bold"
-      }}>{name} ({overallRating}⭐)</div>
-      <div>
-        {menuItems.map((menuItem) => MenuItem(menuItem))}
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%"
+      }}>
+        <div style={{marginBottom: 10}}>
+          <Text large={true} bold={true}>
+            {name} ({overallRating}⭐)
+          </Text>
+          {menuItems.map((menuItem) => MenuItem(menuItem))}
+        </div>
+        
+        <Button>
+          <Text white={true} bold={true}>
+            SEE MORE
+          </Text>
+        </Button>
       </div>
     </Card>
   );
