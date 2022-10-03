@@ -1,31 +1,53 @@
 from django.db import models
 
 # Create your models here.
+class College(models.Model):
+    name = models.CharField(max_length=20, primary_key=True)
+
+    def __str__(self):
+        return self.name
+
 class Reviewer(models.Model):
-    netid = models.CharField(max_length=20)
+    netid = models.CharField(max_length=20, primary_key=True)
     email = models.EmailField(max_length=30)
-    college = models.CharField(max_length=20)
-    numreviews = models.IntegerField()
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
+    numreviews = models.IntegerField(default=0)
 
     def __str__(self):
         return self.netid
 
 class Servery(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, primary_key=True)
 
     def __str__(self):
         return self.name
 
 class MenuItem(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, primary_key=True)
+    eggs = models.BooleanField()
+    fish = models.BooleanField()
+    gluten = models.BooleanField()
+    milk = models.BooleanField()
+    peanuts = models.BooleanField()
+    shellfish = models.BooleanField()
+    soy = models.BooleanField()
+    treeNuts = models.BooleanField()
+    vegan = models.BooleanField()
     vegetarian = models.BooleanField()
-    glutenFree = models.BooleanField()
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['name','eggs','fish','gluten','milk','peanuts',
+                        'shellfish','soy','treeNuts','vegan','vegetarian'], name='menuItem constraint'
+            )
+        ]
 
 class MealType(models.Model):
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=10, primary_key=True)
 
     def __str__(self):
         return self.name
@@ -37,6 +59,13 @@ class Meal(models.Model):
 
     def __str__(self):
         return str(self.servedDate) + "_" + str(self.mealType) + "_" + str(self.servery)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['servery', 'mealType', 'servedDate'], name='meal constraint'
+            )
+        ]
 
 class MenuItemServed(models.Model):
     menuItem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
@@ -44,6 +73,13 @@ class MenuItemServed(models.Model):
 
     def __str__(self):
         return str(self.menuItem.name) + " @ " + str(self.meal)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['menuItem', 'meal'], name='menu item constraint'
+            )
+        ]
 
 class FullReview(models.Model):
     reviewer = models.ForeignKey(Reviewer, on_delete=models.CASCADE)
@@ -52,6 +88,13 @@ class FullReview(models.Model):
 
     def __str__(self):
         return str(self.reviewer.netid) + ": " + str(self.meal)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['reviewer', 'meal'], name='unique reviewer, meal'
+            )
+        ]
 
 class ReviewItem(models.Model):
     fullReview = models.ForeignKey(FullReview, on_delete=models.CASCADE)
@@ -62,3 +105,10 @@ class ReviewItem(models.Model):
 
     def __str__(self):
         return str(self.fullReview.reviewer.netid) + ": " + str(self.fullReview.meal) + ", " + str(self.menuItemServed.menuItem.name)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['fullReview', 'menuItemServed'], name='unique review, menuItemServed'
+            )
+        ]
