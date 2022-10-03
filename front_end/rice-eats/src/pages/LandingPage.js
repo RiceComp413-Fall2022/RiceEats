@@ -18,7 +18,7 @@ export default function LandingPage() {
         <TopBar />
       </div>
 
-      <div style={{marginBottom: 15}}>
+      <div style={{marginBottom: 30}}>
         <MealPicker />
       </div>
       

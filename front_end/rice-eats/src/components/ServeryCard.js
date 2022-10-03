@@ -40,11 +40,30 @@ export default function ServeryCard(props) {
           {menuItems.map((menuItem) => MenuItem(menuItem))}
         </div>
         
-        <Button>
-          <Text white={true} bold={true}>
-            SEE MORE
-          </Text>
-        </Button>
+        <div style={{
+          display: "flex",
+          width: "100%"
+        }}>
+          <div style={{marginLeft: 5, flexGrow: 2}}>
+            <Button>
+              <Text white bold>
+                RATE NOW
+              </Text>
+            </Button>
+          </div>
+
+          <div style={{marginLeft: 5}}>
+            <Button>
+              ^
+            </Button>
+          </div>
+
+          <div style={{marginLeft: 5}}>
+            <Button>
+              ?
+            </Button>
+          </div>
+        </div>
       </div>
     </Card>
   );
