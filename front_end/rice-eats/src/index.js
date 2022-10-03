@@ -13,6 +13,7 @@ import reportWebVitals from './reportWebVitals';
 import { serveryUrl } from './config/config';
 
 import LandingPage from './pages/LandingPage';
+import SouthDetails from './pages/SouthDetails';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: serveryUrl.south,
-    element: <div>south</div>,
+    element: <SouthDetails />,
   },
   {
     path: serveryUrl.north,
