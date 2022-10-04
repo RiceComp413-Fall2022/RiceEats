@@ -14,6 +14,10 @@ import { serveryUrl } from './config/config';
 
 import LandingPage from './pages/LandingPage';
 import SouthDetails from './pages/SouthDetails';
+import NorthDetails from './pages/NorthDetails';
+import WestDetails from './pages/WestDetails';
+import SeibelDetails from './pages/SeibelDetails';
+import BakerDetails from './pages/BakerDetails';
 
 const router = createBrowserRouter([
   {
@@ -26,19 +30,19 @@ const router = createBrowserRouter([
   },
   {
     path: serveryUrl.north,
-    element: <div>north</div>,
+    element: <NorthDetails />,
   },
   {
     path: serveryUrl.west,
-    element: <div>west</div>,
+    element: <WestDetails />,
   },
   {
     path: serveryUrl.seibel,
-    element: <div>seibel</div>,
+    element: <SeibelDetails />,
   },
   {
     path: serveryUrl.baker,
-    element: <div>baker</div>,
+    element: <BakerDetails />,
   },
 ]);
 
