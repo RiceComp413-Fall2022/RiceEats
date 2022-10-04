@@ -25,4 +25,13 @@ HomePage RiceEats
     <input type="submit">
 </form>
 
+<form action="serverymenus" method='post'>
+
+    {% csrf_token %}
+
+    Enter mealtype: <input type="text" name = "mealType"><br>
+    Enter date: <input type="text" name = "date"><br>
+    <input type="submit">
+</form>
+
 {% endblock %}

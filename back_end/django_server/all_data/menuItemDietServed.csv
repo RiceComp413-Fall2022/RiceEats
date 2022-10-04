@@ -1,0 +1,25 @@
+name,date,mealType,servery,eggs,fish,gluten,milk,peanuts,shellfish,soy,treeNuts,vegan,vegetarian
+macaroni & cheese,22-10-01,Dinner,Baker,0,0,1,1,0,0,1,0,0,1
+rotisserie chicken pieces,22-10-01,Dinner,Baker,0,0,0,0,0,0,0,0,0,0
+coconut curry tofu & roasted plantains,22-10-01,Dinner,Baker,0,0,0,0,0,0,1,0,1,0
+smoked brisket with pickles & onions,22-10-01,Dinner,Baker,0,0,0,0,0,0,0,0,0,0
+edamame wild rice,22-10-01,Dinner,North,0,0,1,0,0,0,1,0,1,0
+stuffed shells with marinara,22-10-01,Dinner,North,1,0,1,1,0,0,1,0,0,1
+macaroni & cheese,22-10-01,Dinner,North,1,0,1,1,0,0,1,0,0,1
+barbecue beans,22-10-01,Dinner,North,0,0,0,1,0,0,0,0,1,0
+hot honey glazed chicken (halal),22-10-01,Dinner,North,0,0,0,1,0,0,1,0,0,0
+beef brisket,22-10-01,Dinner,Seibel,0,0,0,0,0,0,1,0,0,0
+fiesta rice with corn & black beans,22-10-01,Dinner,Seibel,0,0,0,0,0,0,0,0,1,0
+tempeh with green chili corn salsa,22-10-01,Dinner,Seibel,0,0,0,0,0,0,1,0,1,0
+chick'n enchiladas with poblano cream,22-10-01,Dinner,Seibel,0,0,1,1,0,0,1,0,0,1
+rosmary potatoes,22-10-01,Dinner,Seibel,0,0,0,0,0,0,0,0,1,0
+balsamic grilled chicken,22-10-01,Dinner,South,0,0,0,0,0,0,1,0,0,0
+beer battered cod & remoulade sauce,22-10-01,Dinner,South,1,1,1,1,0,0,1,0,0,0
+alfredo baked pasta,22-10-01,Dinner,South,0,0,1,1,0,0,0,0,0,1
+jalapeno onion hushpuppies,22-10-01,Dinner,South,1,0,1,1,0,0,1,0,0,1
+plantfare veracruz & rice,22-10-01,Dinner,South,0,0,0,0,0,0,1,0,1,0
+wild rice pilaf,22-10-01,Dinner,West,0,0,1,0,0,0,1,0,1,0
+chicken with honey sriracha sauce,22-10-01,Dinner,West,0,0,1,0,0,0,1,0,0,0
+sauteed tilapia with lime chipotle vinaigrette,22-10-01,Dinner,West,0,1,1,0,0,0,1,0,0,0
+ricotta baked pasta,22-10-01,Dinner,West,0,0,1,1,0,0,1,0,0,1
+tofu stir-fry,22-10-01,Dinner,West,0,0,1,0,0,0,1,0,1,0

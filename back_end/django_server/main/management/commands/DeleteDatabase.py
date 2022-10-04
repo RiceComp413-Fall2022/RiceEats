@@ -10,12 +10,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         #Reviewer, Servery, MenuItem, MealType,FullReview, ReviewItem, Reviewer, Meal, MenuItemServed
-        # Reviewer.objects.all().delete()
+        Reviewer.objects.all().delete()
         Servery.objects.all().delete()
-        # MenuItem.objects.all().delete()
+        MenuItemDiet.objects.all().delete()
+        MenuItem.objects.all().delete()
         MealType.objects.all().delete()
         College.objects.all().delete()
-        # FullReview.objects.all().delete()
-        # ReviewItem.objects.all().delete()
-        # Meal.objects.all().delete()
-        # MenuItemServed.objects.all().delete()
+        FullReview.objects.all().delete()
+        ReviewItem.objects.all().delete()
+        Meal.objects.all().delete()
+        MenuItemDietServed.objects.all().delete()

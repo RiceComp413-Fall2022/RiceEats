@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Reviewer, Servery, MenuItem, MealType,FullReview, ReviewItem, Reviewer, Servery, MenuItem, MealType, Meal, MenuItemServed
+from .models import *
 from django.core import serializers
+from datetime import datetime
 import json
 
 # Create your views here.
@@ -48,26 +49,65 @@ def add2(response):
 
 def serveryMenus(response):
     # return the servery menus from the FoodServed Model
-    mydata = list(MenuItemServed.objects.all().values())
+    mydata = list(MenuItemDietServed.objects.all().values())
 
-    serveryDict = {}
-    for entry in mydata:
-        menuItemId = entry['menuItem_id']
-        menuItemInfo = MenuItem.objects.get(pk=menuItemId)
-        mealId = entry['meal_id']
-        mealInfo = Meal.objects.get(pk=mealId)
-        servery = mealInfo.servery.name
+    try:
+        # get date and mealtype from response object
+        MEALTYPE_str = response.POST['mealType'] # 'Breakfast'
+        DATE_str = response.POST['date'] # '2022-10-01'
+    except:
+        return JsonResponse("ERROR")
+
+    MEALTYPE = MealType.objects.all().filter(name=MEALTYPE_str)
+    #print('len:', len(MEALTYPE))
+    DATE = datetime.strptime(DATE_str, "%y-%m-%d").date()
+
+    returnDict = {}
+
+    # for all serveries
+    for SERVERY in Servery.objects.all():
+        serveryDict = {'name': SERVERY.name, 'overallRating': 5}
+        menuItemsList = []
+        # MEAL <- find the meal object corresonding to servery, date, mealtype
+        #print(SERVERY)
+        MEAL = Meal.objects.all().filter(servery=SERVERY, servedDate=DATE, mealType=MEALTYPE[0])
+        if (len(MEAL) == 0):
+            continue
+        # find all menuItemServed objects corresponding to that MEAL
+        for MENUITEMDIETSERVED in MenuItemDietServed.objects.all().filter(meal=MEAL[0]):
+            # add each menuItemServed object into dict that will become json 
+            #menuItemsList.append()
+            menuItemDiet_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
+            menuItemDiet_dict.pop('_state')
+            menuItemsList.append(menuItemDiet_dict)
+            print(MENUITEMDIETSERVED.menuItemDiet.__dict__)
+            pass
+        serveryDict['menuItemDiet'] = menuItemsList
+        returnDict[SERVERY.name] = serveryDict
+
+    return JsonResponse(returnDict, safe=False)
+
+    # serveryDict = {}
+    # for entry in mydata: # for every menu item served
+    #     #print (entry)
+    #     menuItemId = entry['menuItem_id']
+    #     menuItemInfo = MenuItemDiet.objects.get(pk=menuItemId)
+    #     #print(type(menuItemInfo))
+
+    #     mealId = entry['meal_id']
+    #     mealInfo = Meal.objects.get(pk=mealId)
+    #     servery = mealInfo.servery.name
         
         
-        serialized_obj = serializers.serialize('json', [ menuItemInfo, ])
-        dct = json.loads(serialized_obj)
+    #     serialized_obj = serializers.serialize('json', [ menuItemInfo, ])
+    #     dct = json.loads(serialized_obj)
 
-        # add the menuItem object into its respective servery
-        if servery not in serveryDict:
-            serveryDict[servery] = []
-        serveryDict[servery].append(dct[0]['fields'])
+    #     # add the menuItem object into its respective servery
+    #     if servery not in serveryDict:
+    #         serveryDict[servery] = []
+    #     serveryDict[servery].append(dct[0]['fields'])
     
-    return JsonResponse(serveryDict, safe = False)
+    # return JsonResponse(serveryDict, safe = False)
 
 def submitReview(response):
     val1 = response.POST["reviewId"]
