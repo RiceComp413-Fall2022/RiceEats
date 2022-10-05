@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-import { RetrieveMenus } from '../utils/APICalls';
+import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
 import TextInput from '../components/TextInput';
 
 export default function NorthDetails() {
-  const menus = RetrieveMenus();
-  const north_menu = menus.north;
+  const [menus, setMenus] = useState(RetrieveMenus());
+  const north_menu = menus.North;
+
+  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), 
+    [setMenus]);
+
   return (
     <div style={{
       marginLeft: "12%",
@@ -30,9 +34,9 @@ export default function NorthDetails() {
         </tr>
         </thead>
         <tbody>
-        {north_menu.menuItems.map(item => (
+        {north_menu.menuItemDiet.map(item => (
           <tr>
-            <td>{item.name}</td>
+            <td>{item.menuItem_id}</td>
             <td>{item.rating}</td>
             <td><TextInput/></td>
             <td><TextInput/></td>

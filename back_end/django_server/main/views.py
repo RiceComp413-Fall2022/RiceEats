@@ -6,6 +6,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 import json
 import ast
+from random import randrange
 
 # Create your views here.
 def index(response, id):
@@ -82,6 +83,7 @@ def serveryMenus(response):
             # add each menuItemServed object into dict that will become json 
             #menuItemsList.append()
             menuItemDiet_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
+            menuItemDiet_dict['rating'] = randrange(5)
             menuItemDiet_dict.pop('_state')
             menuItemsList.append(menuItemDiet_dict)
             print(MENUITEMDIETSERVED.menuItemDiet.__dict__)

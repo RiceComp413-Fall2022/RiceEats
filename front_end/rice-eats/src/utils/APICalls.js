@@ -15,83 +15,83 @@ export function PostReview() {
     });
 }
 
-export function realRetrieveMenus() {
+export function realRetrieveMenus(func) {
     axios.post("http://localhost:8000/serverymenus", 
     // "{'hi': 'bye'}" 
     {
         date: "22-10-01",
         mealType: "Dinner"
     }
-    , {'Content-Type': 'application/json'}).then(console.log);
+    , {'Content-Type': 'application/json'}).then(func);
 }
 
 export function RetrieveMenus() {
     return {
-        south: {
+        South: {
             overallRating: 4.3,
-            menuItems: [
+            menuItemDiet: [
                 {
-                    name: "Meatloaf",
+                    menuItem_id: "Meatloaf",
                     rating: 3.2
                 }, 
                 {
-                    name: "Lasagna",
+                    menuItem_id: "Lasagna",
                     rating: 4.8
                 },
                 {
-                    name: "Lasagna",
+                    menuItem_id: "Lasagna",
                     rating: 4.8
                 },
             ]
         },
-        west: {
+        West: {
             overallRating: 3.3,
-            menuItems: [
+            menuItemDiet: [
                 {
-                    name: "Meatloaf",
+                    menuItem_id: "Meatloaf",
                     rating: 3.2
                 }, 
                 {
-                    name: "Lasagna",
+                    menuItem_id: "Lasagna",
                     rating: 4.8
                 },
             ]
         },
-        north: {
+        North: {
             overallRating: 1.3,
-            menuItems: [
+            menuItemDiet: [
                 {
-                    name: "Meatloaf",
+                    menuItem_id: "Meatloaf",
                     rating: 3.2
                 }, 
                 {
-                    name: "Lasagna",
+                    menuItem_id: "Lasagna",
                     rating: 4.8
                 },
             ]
         },
-        seibel: {
+        Seibel: {
             overallRating: 1.3,
-            menuItems: [
+            menuItemDiet: [
                 {
-                    name: "Meatloaf",
+                    menuItem_id: "Meatloaf",
                     rating: 3.2
                 }, 
                 {
-                    name: "Lasagna",
+                    menuItem_id: "Lasagna",
                     rating: 4.8
                 },
             ]
         },
-        baker: {
+        Baker: {
             overallRating: 1.3,
-            menuItems: [
+            menuItemDiet: [
                 {
-                    name: "Meatloaf",
+                    menuItem_id: "Meatloaf",
                     rating: 3.2
                 }, 
                 {
-                    name: "Lasagna",
+                    menuItem_id: "Lasagna",
                     rating: 4.8
                 },
             ]

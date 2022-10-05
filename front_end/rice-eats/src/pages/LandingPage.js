@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 
 import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import { serveryList, serveryName, serveryUrl, serveryMapUrl } from '../config/config';
@@ -6,10 +6,11 @@ import { serveryList, serveryName, serveryUrl, serveryMapUrl } from '../config/c
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
+import Button from '../components/Button';
 
 export default function LandingPage() {
-  const menus = RetrieveMenus();
-  realRetrieveMenus();
+  const [menus, setMenus] = useState(RetrieveMenus());
+  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
   const moveServeryToTop = (serveryName) => {
     
   };
@@ -32,11 +33,14 @@ export default function LandingPage() {
         rowGap: 15, 
         columnGap: 15
       }}>
+        {menus == undefined && (
+          <div> hi</div>
+        )}
         {serveryList.map((servery, index) => (
           <ServeryCard
             name={serveryName[servery]}
             overallRating={menus[servery].overallRating}
-            menuItems={menus[servery].menuItems}
+            menuItems={menus[servery].menuItemDiet}
             url={serveryUrl[servery]} 
             mapUrl={serveryMapUrl[servery]}
             moveToTop={() => undefined}

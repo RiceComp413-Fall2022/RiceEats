@@ -37,7 +37,7 @@ export default function ServeryCard(props) {
           </Text>
           {menuItems.map((menuItem, index) => (
             <div key={index}>
-              {menuItem.name} ({menuItem.rating})
+              {menuItem.menuItem_id} ({menuItem.rating})
             </div>
           ))}
         </div>
