@@ -83,7 +83,7 @@ def serveryMenus(response):
             # add each menuItemServed object into dict that will become json 
             #menuItemsList.append()
             menuItemDiet_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
-            menuItemDiet_dict['rating'] = randrange(5)
+            menuItemDiet_dict['rating'] = randrange(4) + 1
             menuItemDiet_dict.pop('_state')
             menuItemsList.append(menuItemDiet_dict)
             print(MENUITEMDIETSERVED.menuItemDiet.__dict__)
