@@ -55,12 +55,21 @@ def serveryMenus(response):
 
     #try:
         # get date and mealtype from response object
-    byteString = response.body
-    requestDict = ast.literal_eval(byteString.decode('ASCII'))
-    MEALTYPE_str = requestDict['mealType'] # 'Breakfast'
-    DATE_str = requestDict['date'] # '2022-10-01'
+    
+    try:
+        byteString = response.body
+        print('byteString:', byteString)
+        requestDict = ast.literal_eval(byteString.decode('ASCII'))
+        MEALTYPE_str = requestDict['mealType'] # 'Breakfast'
+        DATE_str = requestDict['date'] # '22-10-01'
+    except:
+        try:
+            MEALTYPE_str = response.POST['mealType']
+            DATE_str = response.POST['date']
+        except:
+            return JsonResponse("ERROR")
     #except:
-    #    return JsonResponse("ERROR")
+    #    
 
     MEALTYPE = MealType.objects.all().filter(name=MEALTYPE_str)
     #print('len:', len(MEALTYPE))
@@ -82,6 +91,7 @@ def serveryMenus(response):
             # add each menuItemServed object into dict that will become json 
             #menuItemsList.append()
             menuItemDiet_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
+            menuItemDiet_dict['rating'] = 5
             menuItemDiet_dict.pop('_state')
             menuItemsList.append(menuItemDiet_dict)
             print(MENUITEMDIETSERVED.menuItemDiet.__dict__)
