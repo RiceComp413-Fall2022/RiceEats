@@ -5,16 +5,6 @@ import Text from "./Text";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function MenuItem(props) {
-  const name = props.name;
-  const rating = props.rating;
-  return (
-    <div>
-      {name} ({rating})
-    </div>
-  )
-}
-
 export default function ServeryCard(props) {
   const name = props.name;
   const overallRating = props.overallRating;
@@ -45,7 +35,11 @@ export default function ServeryCard(props) {
           <Text large={true} bold={true}>
             {name} ({overallRating}⭐)
           </Text>
-          {menuItems.map((menuItem) => MenuItem(menuItem))}
+          {menuItems.map((menuItem, index) => (
+            <div key={index}>
+              {menuItem.name} ({menuItem.rating})
+            </div>
+          ))}
         </div>
         
         <div style={{
@@ -53,7 +47,7 @@ export default function ServeryCard(props) {
           width: "100%"
         }}>
           <div style={{marginLeft: 5, flexGrow: 2}}>
-            <Button onClick={onButtonClick}>
+            <Button onClick={onButtonClick} linkStyling>
               <Text white bold>
                 RATE NOW
               </Text>
@@ -64,7 +58,7 @@ export default function ServeryCard(props) {
             <div style={{marginLeft: 5}}>
               <Button onClick={moveToTop}>
                 <Text white bold>
-                  <i class="bi bi-arrow-bar-up" />
+                  <i className="bi bi-arrow-bar-up" />
                 </Text>
               </Button>
             </div>
@@ -74,7 +68,7 @@ export default function ServeryCard(props) {
             <a href={mapUrl} target="_blank">
               <Button>
                 <Text white bold>
-                  <i class="bi bi-geo-alt" />
+                  <i className="bi bi-geo-alt" />
                 </Text>
               </Button>
             </a>

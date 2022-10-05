@@ -10,7 +10,7 @@ export default function MealPicker(props) {
     }}>
       <Text large bold>
         {/* Left arrow */}
-        <i class="bi bi-chevron-left"></i>
+        <i className="bi bi-chevron-left"></i>
       </Text>
 
       <div style={{
@@ -26,7 +26,7 @@ export default function MealPicker(props) {
 
       <Text large bold>
         {/* Right arrow */}
-        <i class="bi bi-chevron-right"></i>
+        <i className="bi bi-chevron-right"></i>
       </Text>
     </div>
   );

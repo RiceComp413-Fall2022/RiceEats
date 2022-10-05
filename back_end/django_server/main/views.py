@@ -3,7 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from .models import *
 from django.core import serializers
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 import json
+import ast
 
 # Create your views here.
 def index(response, id):
@@ -46,17 +48,19 @@ def add2(response):
     }
     return JsonResponse(data)
 
-
+@csrf_exempt
 def serveryMenus(response):
     # return the servery menus from the FoodServed Model
     mydata = list(MenuItemDietServed.objects.all().values())
 
-    try:
+    #try:
         # get date and mealtype from response object
-        MEALTYPE_str = response.POST['mealType'] # 'Breakfast'
-        DATE_str = response.POST['date'] # '2022-10-01'
-    except:
-        return JsonResponse("ERROR")
+    byteString = response.body
+    requestDict = ast.literal_eval(byteString.decode('ASCII'))
+    MEALTYPE_str = requestDict['mealType'] # 'Breakfast'
+    DATE_str = requestDict['date'] # '2022-10-01'
+    #except:
+    #    return JsonResponse("ERROR")
 
     MEALTYPE = MealType.objects.all().filter(name=MEALTYPE_str)
     #print('len:', len(MEALTYPE))
@@ -66,10 +70,10 @@ def serveryMenus(response):
 
     # for all serveries
     for SERVERY in Servery.objects.all():
+        print('servery', SERVERY)
         serveryDict = {'name': SERVERY.name, 'overallRating': 5}
         menuItemsList = []
         # MEAL <- find the meal object corresonding to servery, date, mealtype
-        #print(SERVERY)
         MEAL = Meal.objects.all().filter(servery=SERVERY, servedDate=DATE, mealType=MEALTYPE[0])
         if (len(MEAL) == 0):
             continue
@@ -81,10 +85,8 @@ def serveryMenus(response):
             menuItemDiet_dict.pop('_state')
             menuItemsList.append(menuItemDiet_dict)
             print(MENUITEMDIETSERVED.menuItemDiet.__dict__)
-            pass
         serveryDict['menuItemDiet'] = menuItemsList
         returnDict[SERVERY.name] = serveryDict
-
     return JsonResponse(returnDict, safe=False)
 
     # serveryDict = {}

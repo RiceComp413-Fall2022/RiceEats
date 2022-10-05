@@ -16,10 +16,13 @@ export function PostReview() {
 }
 
 export function realRetrieveMenus() {
-    axios.post("url", {
-        date: "2022-10-01",
-        mealType: "Breakfast"
-    });
+    axios.post("http://localhost:8000/serverymenus", 
+    // "{'hi': 'bye'}" 
+    {
+        date: "22-10-01",
+        mealType: "Dinner"
+    }
+    , {'Content-Type': 'application/json'}).then(console.log);
 }
 
 export function RetrieveMenus() {
