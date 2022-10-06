@@ -90,10 +90,12 @@ def serveryMenus(response):
         for MENUITEMDIETSERVED in MenuItemDietServed.objects.all().filter(meal=MEAL[0]):
             # add each menuItemServed object into dict that will become json 
             #menuItemsList.append()
-            menuItemDiet_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
-            menuItemDiet_dict['rating'] = 5
-            menuItemDiet_dict.pop('_state')
-            menuItemsList.append(menuItemDiet_dict)
+            menuItemDietServed_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
+            menuItemDiet = MENUITEMDIETSERVED.menuItemDiet.menuItem
+            ReviewItem.objects.all().filter()
+            menuItemDietServed_dict['rating'] = 5
+            menuItemDietServed_dict.pop('_state')
+            menuItemsList.append(menuItemDietServed_dict)
             print(MENUITEMDIETSERVED.menuItemDiet.__dict__)
         serveryDict['menuItemDiet'] = menuItemsList
         returnDict[SERVERY.name] = serveryDict
