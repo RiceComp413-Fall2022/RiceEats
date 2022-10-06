@@ -112,7 +112,7 @@ class ReviewItem(models.Model):
     rating = models.IntegerField()
 
     def __str__(self):
-        return str(self.fullReview.reviewer.netid) + ": " + str(self.fullReview.meal) + ", " + str(self.menuItemDietServed.menuItemDiet.name)
+        return str(self.fullReview.reviewer.netid) + ": " + str(self.fullReview.meal) + ", " + str(self.menuItemDietServed.menuItemDiet.menuItem)
     
     class Meta:
         constraints = [

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
+import { PostReview, realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import { serveryList, serveryName, serveryUrl, serveryMapUrl } from '../config/config';
 
 import ServeryCard from '../components/ServeryCard';
@@ -8,6 +8,8 @@ import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
 
 export default function LandingPage() {
+  PostReview();
+
   const menus = RetrieveMenus();
   realRetrieveMenus();
   const moveServeryToTop = (serveryName) => {

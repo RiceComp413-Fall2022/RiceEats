@@ -55,21 +55,12 @@ def serveryMenus(response):
 
     #try:
         # get date and mealtype from response object
-    
-    try:
-        byteString = response.body
-        print('byteString:', byteString)
-        requestDict = ast.literal_eval(byteString.decode('ASCII'))
-        MEALTYPE_str = requestDict['mealType'] # 'Breakfast'
-        DATE_str = requestDict['date'] # '22-10-01'
-    except:
-        try:
-            MEALTYPE_str = response.POST['mealType']
-            DATE_str = response.POST['date']
-        except:
-            return JsonResponse("ERROR")
+    byteString = response.body
+    requestDict = ast.literal_eval(byteString.decode('ASCII'))
+    MEALTYPE_str = requestDict['mealType'] # 'Breakfast'
+    DATE_str = requestDict['date'] # '2022-10-01'
     #except:
-    #    
+    #    return JsonResponse("ERROR")
 
     MEALTYPE = MealType.objects.all().filter(name=MEALTYPE_str)
     #print('len:', len(MEALTYPE))
@@ -79,7 +70,7 @@ def serveryMenus(response):
 
     # for all serveries
     for SERVERY in Servery.objects.all():
-        print('servery', SERVERY)
+        # print('servery', SERVERY)
         serveryDict = {'name': SERVERY.name, 'overallRating': 5}
         menuItemsList = []
         # MEAL <- find the meal object corresonding to servery, date, mealtype
@@ -123,22 +114,64 @@ def serveryMenus(response):
     
     # return JsonResponse(serveryDict, safe = False)
 
+@csrf_exempt
 def submitReview(response):
-    val1 = response.POST["reviewId"]
-    val2 = response.POST["foodId"]
-    val3 = response.POST["score"]
-    val4 = response.POST["comments"]
+    byteString = response.body
+    requestDict = ast.literal_eval(byteString.decode('ASCII'))
 
-    data = {
-        'reviewId': val1,
-        'foodId': val2,
-        'score': val3,
-        'comments': val4
-    }
+    servery = requestDict["serveryName"]
+    date = requestDict["date"]
+    mealType = requestDict["mealType"]
+    reviewerNetId = requestDict["reviewerNetId"]
+    reviewerEmail = requestDict["reviewerEmail"]
+    reviewerCollege = requestDict["reviewerCollege"]
+    reviewerNumReviews = requestDict["reviewerNumReviews"]
+    fullReviewComments = requestDict["comments"]
+    itemReviews = requestDict["itemReviews"] # this is a list
+
+
+    # Create a new Meal instance (for input to full review)
+    meal = None
+    if Meal.objects.filter(servery=Servery.objects.get(pk=servery), mealType=MealType.objects.get(pk=mealType), servedDate=date).exists():
+        meal = Meal.objects.get(servery=Servery.objects.get(pk=servery), mealType=MealType.objects.get(pk=mealType), servedDate=date)
+    else: # it doesn't exist (but would it ever not exist?)
+        meal = Meal(servery=Servery.objects.get(pk=servery), mealType=MealType.objects.get(pk=mealType), servedDate=date)
+        meal.save()
+
+    # Create a new full review instance and save into database
+    reviewer = Reviewer(reviewerNetId, reviewerEmail, College.objects.get(pk=reviewerCollege), reviewerNumReviews)
+    reviewer.save()
     
-    # save a review item instance into the database
+    fullReview = None
+    if FullReview.objects.filter(reviewer=reviewer, meal = meal).exists():
+        fullReview = FullReview.objects.get(reviewer=reviewer, meal = meal)
+        FullReview.objects.filter(reviewer=reviewer, meal = meal).update(reviewText = fullReviewComments)
+    else:
+        fullReview = FullReview(reviewer=reviewer, meal = meal, reviewText = fullReviewComments)
+        fullReview.save()
+    
+    # print("SHEEEEEEEEEEEEEEEEESH", list(MenuItemDiet.objects.all())[0].id)
+    # for every item's review, create an instance and save into database
+    for review in itemReviews:
+        # front end can send this back after we send it to them?
+        menuItemDietId = review["menuItemDietId"]
+        # search for the MenuItemDiet instance of this menu item
+        print("YOOOOOOOOOOOOOOOOO", menuItemDietId)
+        menuItemDiet = MenuItemDiet.objects.get(pk=menuItemDietId)
 
+        menuItemDietServed = None
+        if MenuItemDietServed.objects.filter(menuItemDiet=menuItemDiet, meal=meal):
+            menuItemDietServed = MenuItemDietServed.objects.get(menuItemDiet=menuItemDiet, meal=meal)
+        else:
+            menuItemDietServed = MenuItemDietServed(menuItemDiet=menuItemDiet, meal=meal)
+            menuItemDietServed.save()
+        
+        reviewItem = None
+        if ReviewItem.objects.filter(fullReview=fullReview, menuItemDietServed=menuItemDietServed).exists():
+            reviewItem = ReviewItem.objects.get(fullReview=fullReview, menuItemDietServed=menuItemDietServed)
+            ReviewItem.objects.filter(fullReview=fullReview, menuItemDietServed=menuItemDietServed).update(rating=review["rating"], reviewText=review["comments"], complete = True)
+        else:
+            reviewItem = ReviewItem(fullReview=fullReview, menuItemDietServed=menuItemDietServed, rating=review["rating"], reviewText=review["comments"], complete = True)
+            reviewItem.save()
 
-    # save a fullreview instance into the database
-
-    return JsonResponse(data)
+    return HttpResponse('')
