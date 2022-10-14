@@ -33,3 +33,35 @@ export const serveryColor = {
     "Seibel": "rgb(233, 175, 163)",
     "Baker": "rgb(104, 80, 68)",
 };
+
+export const getOrderedServeryList = () => {
+    try {
+        const serializedState = localStorage.getItem('orderedServeryList');
+        if (serializedState == null) {
+            return serveryList;
+        } else {
+            return JSON.parse(serializedState)
+        }
+    } catch (e) {
+        console.log("ERROR in getOrderedServeryList");
+    }
+};
+
+export const setOrderedServeryList = (newList) => {
+    try {
+        const serializedState = JSON.stringify(newList);
+        localStorage.setItem('orderedServeryList', serializedState);
+    } catch (e) {
+        console.log("ERROR in setOrderedServeryList");
+    }
+};
+
+export const getScreenSize = () => {
+    if (window.innerWidth > 1600) {
+        return "large";
+    } else if (window.innerWidth > 800) {
+        return "medium";
+    } else {
+        return "small";
+    }
+}

@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
 import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
-import { serveryList, serveryName, serveryUrl, serveryMapUrl } from '../config/config';
+import { serveryList, serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
 
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
@@ -10,10 +10,19 @@ import Button from '../components/Button';
 
 export default function LandingPage() {
   const [menus, setMenus] = useState(RetrieveMenus());
+  const [serveries, setServeries] = useState(getOrderedServeryList());
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
   const moveServeryToTop = (serveryName) => {
-    
+    let newServeries = [...serveries];
+    newServeries.splice(newServeries.indexOf(serveryName), 1);
+    newServeries = [serveryName, ...newServeries];
+    setServeries(newServeries);
+    setOrderedServeryList(newServeries);
   };
+
+  const screenSize = getScreenSize();
+  const gridTemplateColumns = screenSize == "large" ? "1fr 1fr 1fr" : screenSize == "medium" ? "1fr 1fr" : "1fr";
+  
   return (
     <div style={{
       marginLeft: "12%",
@@ -29,21 +38,21 @@ export default function LandingPage() {
       
       <div style={{
         display: "grid", 
-        gridTemplateColumns:"1fr 1fr 1fr", 
+        gridTemplateColumns: gridTemplateColumns, 
         rowGap: 15, 
         columnGap: 15
       }}>
         {menus == undefined && (
           <div> hi</div>
         )}
-        {serveryList.map((servery, index) => (
+        {serveries.map((servery, index) => (
           <ServeryCard
             name={serveryName[servery]}
             overallRating={menus[servery].overallRating}
             menuItems={menus[servery].menuItemDiet}
             url={serveryUrl[servery]} 
             mapUrl={serveryMapUrl[servery]}
-            moveToTop={() => undefined}
+            moveToTop={() => moveServeryToTop(serveryName[servery])}
             isTop={index == 0}
             key={index}/>
         ))}

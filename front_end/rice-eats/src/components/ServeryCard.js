@@ -2,7 +2,6 @@ import React from 'react';
 import Button from "./Button";
 import Card from "./Card";
 import Text from "./Text";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function ServeryCard(props) {
@@ -18,9 +17,6 @@ export default function ServeryCard(props) {
   const navigate = useNavigate();
   const onButtonClick = () => {
     navigate(url);
-  }
-  const onMoveToTopClick = () => {
-    navigate("https://github.com/RiceComp413-Fall2022/RiceEats");
   }
 
   return (
@@ -47,7 +43,7 @@ export default function ServeryCard(props) {
           width: "100%"
         }}>
           <div style={{marginLeft: 5, flexGrow: 2}}>
-            <Button onClick={onButtonClick} linkStyling>
+            <Button onClick={onButtonClick}>
               <Text white bold>
                 RATE NOW
               </Text>
