@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
-import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import { serveryList, serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
+import { PostReview, realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
@@ -12,6 +12,8 @@ export default function LandingPage() {
   const [menus, setMenus] = useState(RetrieveMenus());
   const [serveries, setServeries] = useState(getOrderedServeryList());
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
+  PostReview();
+
   const moveServeryToTop = (serveryName) => {
     let newServeries = [...serveries];
     newServeries.splice(newServeries.indexOf(serveryName), 1);

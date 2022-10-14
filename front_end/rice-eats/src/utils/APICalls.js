@@ -1,15 +1,20 @@
 import axios from "axios";
 
 export function PostReview() {
-    axios.post("url", {
-        serveryName: "south",
-        date: "dateformat",
-        mealType: "breakfast",
+    axios.post("http://127.0.0.1:8000/submitreview", {
+        serveryName: "South",
+        date: "2022-10-05",
+        mealType: "Breakfast",
+        reviewerNetId: "mdl8",
+        reviewerEmail: "mdl8@rice.edu",
+        reviewerCollege: "Brown",
+        reviewerNumReviews: 0,
+        comments: "this was not bad......",
         itemReviews: [
             {
-                name: "Meatloaf",
+                menuItemDietId: 5, // tofu stir fry
                 rating: 3,
-                comments: ""
+                comments: "this is some bomb ass mac n cheese"
             }
         ]
     });
