@@ -12,7 +12,7 @@ export function PostReview() {
         comments: "this was not bad......",
         itemReviews: [
             {
-                menuItemDietId: 123, // tofu stir fry
+                menuItemDietId: 5, // tofu stir fry
                 rating: 3,
                 comments: "this is some bomb ass mac n cheese"
             }
