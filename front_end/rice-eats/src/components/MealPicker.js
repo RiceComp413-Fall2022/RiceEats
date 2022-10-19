@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Text from './Text';
 import Button from "./Button";
+import { getCurrentMeal, getMealString1, getMealString2, getNextMeal, getPrevMeal } from '../utils/Meals';
 
 export default function MealPicker(props) {
   // TODO: make this do something lol
-  const onClickPrevMeal = () => {
+  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+  const [mealString1, setMealString1] = useState("Friday, Dinner");
+  const [mealString2, setMealString2] = useState("5:30 PM - 7:30 PM");
 
+  useEffect(() => {
+    setMealString1(getMealString1(dateMeal[0], dateMeal[1]));
+    setMealString2(getMealString2(dateMeal[0], dateMeal[1]));
+  }, [dateMeal]);
+
+  const onClickPrevMeal = () => {
+    const [date, meal] = getPrevMeal(dateMeal[0], dateMeal[1]);
+    setDateMeal([date, meal]);
   };
 
   const onClickNextMeal = () => {
-
+    const [date, meal] = getNextMeal(dateMeal[0], dateMeal[1]);
+    setDateMeal([date, meal]);
   };
 
   return (
@@ -32,8 +44,8 @@ export default function MealPicker(props) {
         alignItems: "center",
         alignContent: "center"
       }}>
-        <Text large bold>Friday, Dinner</Text>
-        <Text large bold>5:30 PM - 7:30 PM</Text>
+        <Text large bold>{mealString1}</Text>
+        <Text large bold>{mealString2}</Text>
       </div>
 
       {/* Right arrow */}

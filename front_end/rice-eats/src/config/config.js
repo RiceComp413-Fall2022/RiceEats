@@ -34,6 +34,82 @@ export const serveryColor = {
     "Baker": "rgb(104, 80, 68)",
 };
 
+export const mealTimes = {
+    "Monday": {
+        "Breakfast": ["7:30 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "1:30 PM"],
+        "Dinner": ["5:30 PM", "7:30 PM"]
+    },
+    "Tuesday": {
+        "Breakfast": ["7:30 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "1:30 PM"],
+        "Dinner": ["5:30 PM", "7:30 PM"]
+    },
+    "Wednesday": {
+        "Breakfast": ["7:30 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "1:30 PM"],
+        "Dinner": ["5:30 PM", "7:30 PM"]
+    },
+    "Thursday": {
+        "Breakfast": ["7:30 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "1:30 PM"],
+        "Dinner": ["5:30 PM", "7:30 PM"]
+    },
+    "Friday": {
+        "Breakfast": ["7:30 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "1:30 PM"],
+        "Dinner": ["5:30 PM", "7:30 PM"]
+    },
+    "Saturday": {
+        "Breakfast": ["8:00 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "2:00 PM"],
+        "Dinner": ["5:30 PM", "7:30 PM"]
+    },
+    "Sunday": {
+        "Breakfast": ["8:00 AM", "10:30 AM"],
+        "Lunch": ["11:30 AM", "2:00 PM"],
+        "Dinner": ["5:00 PM", "7:30 PM"]
+    }
+};
+
+export const availableServeries = {
+    "Monday": {
+        "Breakfast": ["North", "South", "West", "Seibel", "Baker"],
+        "Lunch": ["North", "South", "West", "Seibel", "Baker"],
+        "Dinner": ["North", "South", "West", "Seibel", "Baker"],
+    },
+    "Tuesday": {
+        "Breakfast": ["North", "South", "West", "Seibel", "Baker"],
+        "Lunch": ["North", "South", "West", "Seibel", "Baker"],
+        "Dinner": ["North", "South", "West", "Seibel", "Baker"],
+    },
+    "Wednesday": {
+        "Breakfast": ["North", "South", "West", "Seibel", "Baker"],
+        "Lunch": ["North", "South", "West", "Seibel", "Baker"],
+        "Dinner": ["North", "South", "West", "Seibel", "Baker"],
+    },
+    "Thursday": {
+        "Breakfast": ["North", "South", "West", "Seibel", "Baker"],
+        "Lunch": ["North", "South", "West", "Seibel", "Baker"],
+        "Dinner": ["North", "South", "West", "Seibel", "Baker"],
+    },
+    "Friday": {
+        "Breakfast": ["North", "South", "West", "Seibel", "Baker"],
+        "Lunch": ["North", "South", "West", "Seibel", "Baker"],
+        "Dinner": ["North", "South", "West", "Seibel", "Baker"],
+    },
+    "Saturday": {
+        "Breakfast": ["West", "Seibel"],
+        "Lunch": ["West", "Seibel"],
+        "Dinner": ["West", "Seibel"],
+    },
+    "Sunday": {
+        "Breakfast": ["West", "Seibel"],
+        "Lunch": ["North", "South", "West", "Seibel"],
+        "Dinner": ["North", "South", "West", "Seibel"],
+    },
+}
+
 export const getOrderedServeryList = () => {
     try {
         const serializedState = localStorage.getItem('orderedServeryList');

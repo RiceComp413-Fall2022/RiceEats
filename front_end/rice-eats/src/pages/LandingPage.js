@@ -6,13 +6,12 @@ import { PostReview, realRetrieveMenus, RetrieveMenus } from '../utils/APICalls'
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
-import Button from '../components/Button';
 
 export default function LandingPage() {
   const [menus, setMenus] = useState(RetrieveMenus());
   const [serveries, setServeries] = useState(getOrderedServeryList());
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
-  PostReview();
+  // PostReview();
 
   const moveServeryToTop = (serveryName) => {
     let newServeries = [...serveries];
