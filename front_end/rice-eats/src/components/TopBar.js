@@ -19,7 +19,7 @@ export default function TopBar() {
       paddingBottom: 10}}>
       <div onClick={onLogoClick} style={{cursor: "pointer", height: "100%"}}>
         <img style={{height: "100%", width: "100%", display: "block"}}
-          src="logo4.png"/>
+          src="logo4.png" alt="rice eats logo"/>
       </div>
       <Button>
         <Text white={true} bold={true}>

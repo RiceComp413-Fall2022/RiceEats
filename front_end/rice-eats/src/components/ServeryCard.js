@@ -61,7 +61,7 @@ export default function ServeryCard(props) {
           )}
 
           <div style={{marginLeft: 5}}>
-            <a href={mapUrl} target="_blank">
+            <a href={mapUrl} target="_blank" rel="referrer">
               <Button>
                 <Text white bold>
                   <i className="bi bi-geo-alt" />

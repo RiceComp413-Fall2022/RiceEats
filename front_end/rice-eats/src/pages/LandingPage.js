@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
-import { serveryList, serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
-import { PostReview, realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
+import { serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
+import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
@@ -22,7 +22,7 @@ export default function LandingPage() {
   };
 
   const screenSize = getScreenSize();
-  const gridTemplateColumns = screenSize == "large" ? "1fr 1fr 1fr" : screenSize == "medium" ? "1fr 1fr" : "1fr";
+  const gridTemplateColumns = screenSize === "large" ? "1fr 1fr 1fr" : screenSize === "medium" ? "1fr 1fr" : "1fr";
   
   return (
     <div style={{
@@ -43,7 +43,7 @@ export default function LandingPage() {
         rowGap: 15, 
         columnGap: 15
       }}>
-        {menus == undefined && (
+        {menus === undefined && (
           <div> hi</div>
         )}
         {serveries.map((servery, index) => (
@@ -54,7 +54,7 @@ export default function LandingPage() {
             url={serveryUrl[servery]} 
             mapUrl={serveryMapUrl[servery]}
             moveToTop={() => moveServeryToTop(serveryName[servery])}
-            isTop={index == 0}
+            isTop={index === 0}
             key={index}/>
         ))}
       </div>
