@@ -15,7 +15,7 @@ export const getCurrentMeal = () => {
   return [dateString, mealType];
 };
 
-export const getNextMeal = (date, mealType) => {
+export const getNextMeal = (date, mealType) => { 
   if (mealType === "Breakfast") {
     return [date, "Lunch"];
   } else if (mealType === "Lunch") {
