@@ -6,6 +6,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 import json
 import ast
+from random import randrange
 
 # Create your views here.
 def index(response, id):
@@ -152,6 +153,7 @@ def submitReview(response):
     
     # print("SHEEEEEEEEEEEEEEEEESH", list(MenuItemDiet.objects.all())[0].id)
     # for every item's review, create an instance and save into database
+    print(MenuItemDiet.objects.all())
     for review in itemReviews:
         # front end can send this back after we send it to them?
         menuItemDietId = review["menuItemDietId"]

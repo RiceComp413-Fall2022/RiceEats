@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { RetrieveMenus } from '../utils/APICalls';
+import { RetrieveMenus, realRetrieveMenus } from '../utils/APICalls';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
 import TextInput from '../components/TextInput';
 
 export default function BakerDetails() {
-  const menus = RetrieveMenus();
-  const baker_menu = menus.baker;
+  const [menus, setMenus] = useState(RetrieveMenus());
+  const baker_menu = menus.Baker;
+
+  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), 
+    [setMenus]);
+
   return (
     <div style={{
       marginLeft: "12%",
@@ -30,9 +34,9 @@ export default function BakerDetails() {
         </tr>
         </thead>
         <tbody>
-        {baker_menu.menuItems.map(item => (
+        {baker_menu.menuItemDiet.map(item => (
           <tr>
-            <td>{item.name}</td>
+            <td>{item.menuItem_id}</td>
             <td>{item.rating}</td>
             <td><TextInput/></td>
             <td><TextInput/></td>

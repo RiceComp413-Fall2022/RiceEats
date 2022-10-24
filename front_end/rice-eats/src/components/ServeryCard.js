@@ -2,7 +2,6 @@ import React from 'react';
 import Button from "./Button";
 import Card from "./Card";
 import Text from "./Text";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function ServeryCard(props) {
@@ -19,9 +18,6 @@ export default function ServeryCard(props) {
   const onButtonClick = () => {
     navigate(url);
   }
-  const onMoveToTopClick = () => {
-    navigate("https://github.com/RiceComp413-Fall2022/RiceEats");
-  }
 
   return (
     <Card backgroundColor={backgroundColor}>
@@ -37,7 +33,7 @@ export default function ServeryCard(props) {
           </Text>
           {menuItems.map((menuItem, index) => (
             <div key={index}>
-              {menuItem.name} ({menuItem.rating})
+              {menuItem.menuItem_id} ({menuItem.rating})
             </div>
           ))}
         </div>
@@ -47,7 +43,7 @@ export default function ServeryCard(props) {
           width: "100%"
         }}>
           <div style={{marginLeft: 5, flexGrow: 2}}>
-            <Button onClick={onButtonClick} linkStyling>
+            <Button onClick={onButtonClick}>
               <Text white bold>
                 RATE NOW
               </Text>
@@ -65,7 +61,7 @@ export default function ServeryCard(props) {
           )}
 
           <div style={{marginLeft: 5}}>
-            <a href={mapUrl} target="_blank">
+            <a href={mapUrl} target="_blank" rel="noreferrer">
               <Button>
                 <Text white bold>
                   <i className="bi bi-geo-alt" />

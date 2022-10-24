@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -25,23 +24,23 @@ const router = createBrowserRouter([
     element: <LandingPage />,
   },
   {
-    path: serveryUrl.south,
+    path: serveryUrl.South,
     element: <SouthDetails />,
   },
   {
-    path: serveryUrl.north,
+    path: serveryUrl.North,
     element: <NorthDetails />,
   },
   {
-    path: serveryUrl.west,
+    path: serveryUrl.West,
     element: <WestDetails />,
   },
   {
-    path: serveryUrl.seibel,
+    path: serveryUrl.Seibel,
     element: <SeibelDetails />,
   },
   {
-    path: serveryUrl.baker,
+    path: serveryUrl.Baker,
     element: <BakerDetails />,
   },
 ]);

@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-import { RetrieveMenus } from '../utils/APICalls';
+import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
 import TextInput from '../components/TextInput';
 
 export default function WestDetails() {
-  const menus = RetrieveMenus();
-  const west_menu = menus.west;
+  const [menus, setMenus] = useState(RetrieveMenus());
+  const west_menu = menus.West;
+
+  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), 
+    [setMenus]);
+
   return (
     <div style={{
       marginLeft: "12%",
@@ -30,9 +34,9 @@ export default function WestDetails() {
         </tr>
         </thead>
         <tbody>
-        {west_menu.menuItems.map(item => (
+        {west_menu.menuItemDiet.map(item => (
           <tr>
-            <td>{item.name}</td>
+            <td>{item.menuItem_id}</td>
             <td>{item.rating}</td>
             <td><TextInput/></td>
             <td><TextInput/></td>
