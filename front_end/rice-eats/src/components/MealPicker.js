@@ -5,7 +5,9 @@ import { getCurrentMeal, getMealString1, getMealString2, getNextMeal, getPrevMea
 
 export default function MealPicker(props) {
   // TODO: make this do something lol
-  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+  const dateMeal = props.dateMeal;
+  const setDateMeal = props.setDateMeal;
+  // const [dateMeal, setDateMeal] = useState(getCurrentMeal());
   const [mealString1, setMealString1] = useState("Friday, Dinner");
   const [mealString2, setMealString2] = useState("5:30 PM - 7:30 PM");
 

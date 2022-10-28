@@ -24,7 +24,9 @@ export const serveryMapUrl = {
     "North": "https://www.google.com/maps/place/North+Servery/@29.7219006,-95.3987426,17z/data=!3m1!4b1!4m5!3m4!1s0x8640c07f1d54ac13:0x566bbb6a63a6711d!8m2!3d29.7218276!4d-95.3963882",
     "Seibel": "https://www.google.com/maps/place/Abe+and+Annie+Seibel+Servery/@29.7160065,-95.4006022,17z/data=!3m1!4b1!4m5!3m4!1s0x8640c079900c3119:0x73956ef64083be12!8m2!3d29.7160065!4d-95.3984135",
     "Baker": "https://www.google.com/maps/place/Baker+College/@29.7172288,-95.4011985,17z/data=!3m1!4b1!4m5!3m4!1s0x8640c192b6342669:0x318e651a70c32638!8m2!3d29.7172288!4d-95.3990098"
-}
+};
+
+export const backendUrl = "https://rice-eats-backend.herokuapp.com";
 
 export const serveryColor = {
     "South": "rgb(58, 64, 90)",

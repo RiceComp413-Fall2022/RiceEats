@@ -24,12 +24,12 @@ export const getNextMeal = (date, mealType) => {
     const d = createDateFromDateString(date);
     const newD = addDays(d, 1);
     const dateString = newD.toISOString().split('T')[0];
-    return [dateString, "Breakfast"];
+    return [dateString, "Lunch"];
   }
 };
 
 export const getPrevMeal = (date, mealType) => {
-  if (mealType === "Breakfast") {
+  if (mealType === "Lunch") {
     const d = createDateFromDateString(date);
     const newD = subDays(d, 1);
     const dateString = newD.toISOString().split('T')[0];

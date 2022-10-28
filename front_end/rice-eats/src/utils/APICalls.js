@@ -1,7 +1,8 @@
 import axios from "axios";
+import { backendUrl } from "../config/config";
 
 export function PostReview() {
-    axios.post("http://127.0.0.1:8000/submitreview", {
+    axios.post(backendUrl + "/submitreview", {
         serveryName: "South",
         date: "2022-10-05",
         mealType: "Breakfast",
@@ -20,12 +21,12 @@ export function PostReview() {
     });
 }
 
-export function realRetrieveMenus(func) {
-    axios.post("http://localhost:8000/serverymenus", 
-    // "{'hi': 'bye'}" 
+export function realRetrieveMenus(func, date, mealType) {
+    const realDate = date.substring(2);
+    axios.post(backendUrl + "/serverymenus",
     {
-        date: "22-10-01",
-        mealType: "Dinner"
+        date: realDate,
+        mealType: mealType
     }
     , {'Content-Type': 'application/json'}).then(func);
 }

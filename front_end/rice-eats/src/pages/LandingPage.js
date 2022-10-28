@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 
 import { serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
 import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
+import { getCurrentMeal } from '../utils/Meals';
 
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
@@ -10,7 +11,10 @@ import MealPicker from '../components/MealPicker';
 export default function LandingPage() {
   const [menus, setMenus] = useState(RetrieveMenus());
   const [serveries, setServeries] = useState(getOrderedServeryList());
-  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
+  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+  console.log(dateMeal[0]);
+  console.log(dateMeal[1]);
+  useEffect(() => realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]), [setMenus, dateMeal]);
   // PostReview();
 
   const moveServeryToTop = (serveryName) => {
@@ -20,7 +24,6 @@ export default function LandingPage() {
     setServeries(newServeries);
     setOrderedServeryList(newServeries);
   };
-
   const screenSize = getScreenSize();
   const gridTemplateColumns = screenSize === "large" ? "1fr 1fr 1fr" : screenSize === "medium" ? "1fr 1fr" : "1fr";
   
@@ -34,7 +37,7 @@ export default function LandingPage() {
       </div>
 
       <div style={{marginBottom: 30}}>
-        <MealPicker />
+        <MealPicker dateMeal={dateMeal} setDateMeal={setDateMeal} />
       </div>
       
       <div style={{
