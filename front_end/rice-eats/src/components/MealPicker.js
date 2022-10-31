@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Text from './Text';
 import Button from "./Button";
-import { getCurrentMeal, getMealString1, getMealString2, getNextMeal, getPrevMeal } from '../utils/Meals';
+import { getMealString1, getMealString2, getNextMeal, getPrevMeal } from '../utils/Meals';
 
 export default function MealPicker(props) {
   // TODO: make this do something lol
