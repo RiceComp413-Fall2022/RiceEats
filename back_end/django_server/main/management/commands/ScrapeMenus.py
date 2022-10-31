@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand
 import pandas as pd
 from main.models import *
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+# from bs4 import BeautifulSoup
+# from selenium import webdriver
+# from webdriver_manager.chrome import ChromeDriverManager
 import requests
 import json
 import calendar

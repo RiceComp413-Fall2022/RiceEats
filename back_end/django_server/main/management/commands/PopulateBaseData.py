@@ -10,14 +10,16 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        df_servery = pd.read_csv('all_data/serverys.csv')
-        for NAME in df_servery.name:
-            servery = Servery(name=NAME)
-            servery.save()
-        df_mealType = pd.read_csv('all_data/mealTypes.csv')
-        for NAME in df_mealType.name:
-            mealType = MealType(name=NAME)
-            mealType.save()
+            # don't even need serveries (already handled in scrapemenus)
+        # df_servery = pd.read_csv('all_data/serverys.csv')
+        # for NAME in df_servery.name:
+        #     servery = Servery(name=NAME)
+        #     servery.save()
+            # don't even need mealtypes anymore
+        # df_mealType = pd.read_csv('all_data/mealTypes.csv')
+        # for NAME in df_mealType.name:
+        #     mealType = MealType(name=NAME)
+        #     mealType.save()
         df_colleges = pd.read_csv('all_data/colleges.csv')
         for NAME in df_colleges.name:
             college = College(name=NAME)
