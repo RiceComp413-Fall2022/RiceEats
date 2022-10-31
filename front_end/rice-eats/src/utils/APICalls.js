@@ -28,7 +28,10 @@ export function realRetrieveMenus(func, date, mealType) {
         date: realDate,
         mealType: mealType
     }
-    , {'Content-Type': 'application/json'}).then(func);
+    , {'Content-Type': 'application/json'}).then((data) => {
+        console.log(data);
+        func(data);
+    });
 }
 
 export function RetrieveMenus() {

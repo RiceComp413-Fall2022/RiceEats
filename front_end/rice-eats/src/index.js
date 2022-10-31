@@ -17,6 +17,7 @@ import NorthDetails from './pages/NorthDetails';
 import WestDetails from './pages/WestDetails';
 import SeibelDetails from './pages/SeibelDetails';
 import BakerDetails from './pages/BakerDetails';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
     path: serveryUrl.Baker,
     element: <BakerDetails />,
   },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
