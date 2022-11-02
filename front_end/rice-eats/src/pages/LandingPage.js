@@ -9,6 +9,7 @@ import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
 import NoDataError from '../components/NoDataError';
+import LoadingWheel from '../components/LoadingWheel';
 
 function ServeryCards(props) {
   const gridTemplateColumns = props.gridTemplateColumns;
@@ -39,13 +40,11 @@ function ServeryCards(props) {
 }
 
 export default function LandingPage() {
-  const [menus, setMenus] = useState(RetrieveMenus());
+  const [menus, setMenus] = useState();
   const [serveries, setServeries] = useState(getOrderedServeryList());
   const [dateMeal, setDateMeal] = useState(getCurrentMeal());
-  console.log(dateMeal[0]);
-  console.log(dateMeal[1]);
+
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]), [setMenus, dateMeal]);
-  // PostReview();
 
   const moveServeryToTop = (serveryName) => {
     let newServeries = [...serveries];
@@ -70,13 +69,18 @@ export default function LandingPage() {
         <MealPicker dateMeal={dateMeal} setDateMeal={setDateMeal} />
       </div>
       
-      <ErrorBoundary FallbackComponent={NoDataError}>
-        <ServeryCards 
-          gridTemplateColumns={gridTemplateColumns} 
-          serveries={serveries} 
-          menus={menus} 
-          moveServeryToTop={moveServeryToTop}/>
-      </ErrorBoundary>
+      {!menus &&
+        <LoadingWheel />
+      }
+      {menus &&
+        <ErrorBoundary FallbackComponent={NoDataError}>
+          <ServeryCards 
+            gridTemplateColumns={gridTemplateColumns} 
+            serveries={serveries} 
+            menus={menus} 
+            moveServeryToTop={moveServeryToTop}/>
+        </ErrorBoundary>
+      }
     </div>
   );
 }
