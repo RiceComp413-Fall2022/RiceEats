@@ -4,9 +4,39 @@ import { serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrder
 import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import { getCurrentMeal } from '../utils/Meals';
 
+import { ErrorBoundary } from 'react-error-boundary';
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
+import NoDataError from '../components/NoDataError';
+
+function ServeryCards(props) {
+  const gridTemplateColumns = props.gridTemplateColumns;
+  const serveries = props.serveries;
+  const menus = props.menus;
+  const moveServeryToTop = props.moveServeryToTop;
+
+  return (
+    <div style={{
+      display: "grid", 
+      gridTemplateColumns: gridTemplateColumns, 
+      rowGap: 15, 
+      columnGap: 15
+    }}>
+      {serveries.map((servery, index) => (
+        <ServeryCard
+          name={serveryName[servery]}
+          overallRating={menus[servery].overallRating}
+          menuItems={menus[servery].menuItemDiet}
+          url={serveryUrl[servery]} 
+          mapUrl={serveryMapUrl[servery]}
+          moveToTop={() => moveServeryToTop(serveryName[servery])}
+          isTop={index === 0}
+          key={index}/>
+      ))}
+    </div>
+  );
+}
 
 export default function LandingPage() {
   const [menus, setMenus] = useState(RetrieveMenus());
@@ -40,27 +70,13 @@ export default function LandingPage() {
         <MealPicker dateMeal={dateMeal} setDateMeal={setDateMeal} />
       </div>
       
-      <div style={{
-        display: "grid", 
-        gridTemplateColumns: gridTemplateColumns, 
-        rowGap: 15, 
-        columnGap: 15
-      }}>
-        {menus === undefined && (
-          <div> hi</div>
-        )}
-        {serveries.map((servery, index) => (
-          <ServeryCard
-            name={serveryName[servery]}
-            overallRating={menus[servery].overallRating}
-            menuItems={menus[servery].menuItemDiet}
-            url={serveryUrl[servery]} 
-            mapUrl={serveryMapUrl[servery]}
-            moveToTop={() => moveServeryToTop(serveryName[servery])}
-            isTop={index === 0}
-            key={index}/>
-        ))}
-      </div>
+      <ErrorBoundary FallbackComponent={NoDataError}>
+        <ServeryCards 
+          gridTemplateColumns={gridTemplateColumns} 
+          serveries={serveries} 
+          menus={menus} 
+          moveServeryToTop={moveServeryToTop}/>
+      </ErrorBoundary>
     </div>
   );
 }
