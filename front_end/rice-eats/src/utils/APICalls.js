@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export function PostReview(serveryName, itemReviews) {
+    console.log(itemReviews);
     axios.post("http://127.0.0.1:8000/submitreview", {
         serveryName: serveryName,
         //fix the date to be a function and return current date

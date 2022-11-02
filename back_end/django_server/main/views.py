@@ -120,6 +120,8 @@ def submitReview(response):
     byteString = response.body
     requestDict = ast.literal_eval(byteString.decode('ASCII'))
 
+    print("YOOOOO", requestDict)
+
     servery = requestDict["serveryName"]
     date = requestDict["date"]
     mealType = requestDict["mealType"]
@@ -158,7 +160,7 @@ def submitReview(response):
         # front end can send this back after we send it to them?
         menuItemDietId = review["menuItemDietId"]
         # search for the MenuItemDiet instance of this menu item
-        print("YOOOOOOOOOOOOOOOOO", menuItemDietId)
+        # print("YOOOOOOOOOOOOOOOOO", menuItemDietId)
         menuItemDiet = MenuItemDiet.objects.get(pk=menuItemDietId)
 
         menuItemDietServed = None

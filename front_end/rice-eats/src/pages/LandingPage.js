@@ -12,7 +12,6 @@ export default function LandingPage() {
   const [menus, setMenus] = useState(RetrieveMenus());
   const [serveries, setServeries] = useState(getOrderedServeryList());
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
-  PostReview();
 
   const moveServeryToTop = (serveryName) => {
     let newServeries = [...serveries];

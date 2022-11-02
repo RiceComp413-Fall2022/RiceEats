@@ -12,17 +12,20 @@ export default function BakerDetails() {
   const [actualReview, setActualReview] = useState(new Array(baker_menu.menuItemDiet.length));
   const [reviewComments, setReviewComments] = useState(new Array(baker_menu.menuItemDiet.length));
 
-  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), 
+  useEffect(() => realRetrieveMenus((response) => {
+    console.log(response);
+    setMenus(response.data);
+  }), 
     [setMenus]);
 
   useEffect(() => {
-    let itemReview = new Array(3);
     for (let i = 0; i < baker_menu.menuItemDiet.length; i++) {
-      itemReview[0] = baker_menu.menuItemDiet[i].menuItem_id
-      itemReview[1] = actualReview[i]
-      itemReview[2] = reviewComments[i]
-      console.log(itemReview)
-      PostReview("Baker", itemReview)
+      let itemReview = new Array(3);
+      itemReview[0] = baker_menu.menuItemDiet[i].menuItem_id;
+      // console.log(baker_menu.menuItemDiet[i])
+      itemReview[1] = actualReview[i];
+      itemReview[2] = reviewComments[i];
+      PostReview("Baker", itemReview);
     } 
   });
 
