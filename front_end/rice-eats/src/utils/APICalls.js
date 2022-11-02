@@ -1,22 +1,25 @@
 import axios from "axios";
 
-export function PostReview() {
+export function PostReview(serveryName, itemReviews) {
     axios.post("http://127.0.0.1:8000/submitreview", {
-        serveryName: "South",
+        serveryName: serveryName,
+        //fix the date to be a function and return current date
         date: "2022-10-05",
         mealType: "Breakfast",
         reviewerNetId: "mdl8",
         reviewerEmail: "mdl8@rice.edu",
         reviewerCollege: "Brown",
-        reviewerNumReviews: 0,
+        reviewerNumReviews: 1,
         comments: "this was not bad......",
-        itemReviews: [
-            {
-                menuItemDietId: 5, // tofu stir fry
-                rating: 3,
-                comments: "this is some bomb ass mac n cheese"
-            }
-        ]
+        itemReviews: itemReviews
+        
+        // itemReviews: [
+        //     {
+        //         menuItemDietId: 5, // tofu stir fry
+        //         rating: 3,
+        //         comments: "this is some bomb ass mac n cheese"
+        //     }
+        // ]
     });
 }
 

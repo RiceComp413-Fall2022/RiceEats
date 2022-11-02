@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
-import TextInput from '../components/TextInput';
+import TextInput from '../components/ReviewTextInput';
 
 export default function NorthDetails() {
   const [menus, setMenus] = useState(RetrieveMenus());
