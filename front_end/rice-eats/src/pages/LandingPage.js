@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
 import { serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
-import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
+import { realRetrieveMenus } from '../utils/APICalls';
 import { getCurrentMeal } from '../utils/Meals';
 
 import { ErrorBoundary } from 'react-error-boundary';
