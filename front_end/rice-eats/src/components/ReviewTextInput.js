@@ -6,6 +6,7 @@ const ReviewTextInput = props => {
 
   function editCurrentReviews(currentReviews, newValue) {
     currentReviews[index] = newValue
+    console.log(currentReviews[index])
     return currentReviews
   }
 

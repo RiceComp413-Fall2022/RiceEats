@@ -11,23 +11,34 @@ export default function BakerDetails() {
   const baker_menu = menus.Baker;
   const [actualReview, setActualReview] = useState(new Array(baker_menu.menuItemDiet.length));
   const [reviewComments, setReviewComments] = useState(new Array(baker_menu.menuItemDiet.length));
+  const [allReviews, setAllReviews] = useState([]);
 
   useEffect(() => realRetrieveMenus((response) => {
     console.log(response);
     setMenus(response.data);
+    console.log(response.data);
   }), 
     [setMenus]);
 
   useEffect(() => {
+    console.log(actualReview)
     for (let i = 0; i < baker_menu.menuItemDiet.length; i++) {
-      let itemReview = new Array(3);
-      itemReview[0] = baker_menu.menuItemDiet[i].menuItem_id;
+      let itemReview = {};
+      itemReview["menuItemDietId"] = baker_menu.menuItemDiet[i].id;
       // console.log(baker_menu.menuItemDiet[i])
-      itemReview[1] = actualReview[i];
-      itemReview[2] = reviewComments[i];
-      PostReview("Baker", itemReview);
+      console.log("actualreview " + actualReview[i]);
+      itemReview["rating"] = actualReview[i] ?? "";
+      itemReview["comments"] = reviewComments[i] ?? "";
+      let localReviews = allReviews;
+      localReviews[i] = itemReview;
+      setAllReviews(localReviews);
     } 
   });
+
+  function post_review() {
+    console.log(allReviews);
+    PostReview("Baker", allReviews);
+  }
 
   return (
     <div style={{
@@ -61,7 +72,7 @@ export default function BakerDetails() {
         ))}
         </tbody>
       </Table>
-      <a href='/'><button>Submit</button></a>
+      <button onClick={() => post_review()} >Submit</button>
     </div>
     </div>
   );

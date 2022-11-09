@@ -5,7 +5,7 @@ export function PostReview(serveryName, itemReviews) {
     axios.post("http://127.0.0.1:8000/submitreview", {
         serveryName: serveryName,
         //fix the date to be a function and return current date
-        date: "2022-10-05",
+        date: "2022-10-22",
         mealType: "Breakfast",
         reviewerNetId: "mdl8",
         reviewerEmail: "mdl8@rice.edu",
@@ -22,6 +22,7 @@ export function PostReview(serveryName, itemReviews) {
         //     }
         // ]
     });
+    console.log('finished posting');
 }
 
 export function realRetrieveMenus(func) {
