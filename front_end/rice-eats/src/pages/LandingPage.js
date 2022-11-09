@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
 import { realRetrieveMenus } from '../utils/APICalls';
@@ -70,7 +70,9 @@ export default function LandingPage() {
       </div>
       
       {!menus &&
-        <LoadingWheel />
+        <div style={{marginTop:"20%", display:"flex", justifyContent:"center"}}>
+          <LoadingWheel />
+        </div>
       }
       {menus &&
         <ErrorBoundary FallbackComponent={NoDataError}>

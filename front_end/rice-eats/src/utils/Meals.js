@@ -12,6 +12,7 @@ export const getCurrentMeal = () => {
   if (hour >= 14) {
     mealType = "Dinner";
   }
+  // console.log([dateString, mealType]);
   return [dateString, mealType];
 };
 

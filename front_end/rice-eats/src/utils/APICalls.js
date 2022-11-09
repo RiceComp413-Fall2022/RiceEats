@@ -22,6 +22,8 @@ export function PostReview() {
 }
 
 export function realRetrieveMenus(func, date, mealType) {
+    // console.log("hi");
+    // console.log(date);
     const realDate = date.substring(2);
     axios.post(backendUrl + "/serverymenus",
     {
@@ -29,7 +31,7 @@ export function realRetrieveMenus(func, date, mealType) {
         mealType: mealType
     }
     , {'Content-Type': 'application/json'}).then((response) => {
-        console.log(response);
+        // console.log(response);
         func(response)
     });
 }
