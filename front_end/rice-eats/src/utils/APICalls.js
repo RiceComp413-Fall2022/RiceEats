@@ -1,33 +1,34 @@
 import axios from "axios";
+import { backendUrl } from "../config/config";
 
-export function PostReview() {
-    axios.post("http://127.0.0.1:8000/submitreview", {
-        serveryName: "North",
-        date: "2022-10-05",
-        mealType: "Breakfast",
-        reviewerNetId: "mdl8",
-        reviewerEmail: "mdl8@rice.edu",
-        reviewerCollege: "Brown",
-        reviewerNumReviews: 0,
-        comments: "this was not bad......",
-        itemReviews: [
-            {
-                menuItemDietId: 5,
-                rating: 3,
-                comments: "this is some bomb ass mac n cheese"
-            }
-        ]
+export function PostReview(serveryName, date, mealType, netId, itemReviews) {
+    // console.log(itemReviews);
+    axios.post(backendUrl + "/submitreview", {
+        serveryName: serveryName,
+        date: date,
+        mealType: mealType,
+        reviewerNetId: netId,
+        reviewerEmail: "N/A",
+        reviewerCollege: "Baker", // TODO: get rid of this parameter. backend needs it for now but doesn't use it
+        reviewerNumReviews: 1,
+        comments: "N/A",
+        itemReviews: itemReviews
     });
 }
 
-export function realRetrieveMenus(func) {
-    axios.post("http://localhost:8000/serverymenus", 
-    // "{'hi': 'bye'}" 
+export function realRetrieveMenus(func, date, mealType) {
+    // console.log("hi");
+    // console.log(date);
+    const realDate = date.substring(2);
+    axios.post(backendUrl + "/serverymenus",
     {
-        date: "22-10-01",
-        mealType: "Dinner"
+        date: realDate,
+        mealType: mealType
     }
-    , {'Content-Type': 'application/json'}).then(func);
+    , {'Content-Type': 'application/json'}).then((response) => {
+        // console.log(response);
+        func(response)
+    });
 }
 
 export function RetrieveMenus() {

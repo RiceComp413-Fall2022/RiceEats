@@ -1,51 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
-import { realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
-import TopBar from '../components/TopBar';
-import MealPicker from '../components/MealPicker';
-import TextInput from '../components/TextInput';
+import { realRetrieveMenus } from '../utils/APICalls';
+import { getCurrentMeal } from '../utils/Meals';
+import ReviewMenu from '../components/ReviewMenu';
 
 export default function NorthDetails() {
-  const [menus, setMenus] = useState(RetrieveMenus());
-  const north_menu = menus.North;
+  const [menus, setMenus] = useState();
+  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+  const north_menu = menus?.North;
 
-  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), 
-    [setMenus]);
+  useEffect(() => {
+    if (dateMeal) {
+      realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]);
+    }
+  }, [setMenus, dateMeal]);
 
   return (
-    <div style={{
-      marginLeft: "12%",
-      marginRight: "12%"
-      }}>
-    <div style={{marginBottom: 15}}>
-      <TopBar />
-     </div>
-     <div style={{marginBottom: 30}}>
-      <MealPicker />
-    </div>
-    <div>
-      <Table striped bordered hover>
-        <thead>
-        <tr>
-          <th>Item</th>
-          <th>Current Rating</th>
-          <th>My Rating</th>
-          <th>Comments</th>
-        </tr>
-        </thead>
-        <tbody>
-        {north_menu.menuItemDiet.map(item => (
-          <tr>
-            <td>{item.menuItem_id}</td>
-            <td>{item.rating}</td>
-            <td><TextInput/></td>
-            <td><TextInput/></td>
-          </tr>
-        ))}
-        </tbody>
-      </Table>
-      <a href='/'><button>Submit</button></a>
-    </div>
-    </div>
+    <ReviewMenu menu={north_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
   );
 }

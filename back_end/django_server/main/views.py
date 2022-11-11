@@ -10,6 +10,7 @@ from random import randrange
 
 # Create your views here.
 def index(response, id):
+    print("test2")
     ls = FullReview.objects.get(id=id)
     #item = ls.reviewitem_set.get(id=1)
     return render(response, "main/list.html", {"ls": ls}) # {} is an open dictionary
@@ -29,6 +30,7 @@ def home(response):
 def add(response):
     val1 = response.POST["num1"]
     val2 = response.POST["num2"]
+    print("test3")
     try:
         res = int(val1) + int(val2)
     except:
@@ -51,6 +53,7 @@ def add2(response):
 
 @csrf_exempt
 def serveryMenus(response):
+    print("test")
     # return the servery menus from the FoodServed Model
     mydata = list(MenuItemDietServed.objects.all().values())
 
@@ -71,7 +74,7 @@ def serveryMenus(response):
 
     # for all serveries
     for SERVERY in Servery.objects.all():
-        # print('servery', SERVERY)
+        print('servery', SERVERY)
         serveryDict = {'name': SERVERY.name, 'overallRating': 5}
         menuItemsList = []
         # MEAL <- find the meal object corresonding to servery, date, mealtype
@@ -116,6 +119,7 @@ def serveryMenus(response):
             menuItemsList.append(menuItemDietServed_dict)
         serveryDict['menuItemDiet'] = menuItemsList
         returnDict[SERVERY.name] = serveryDict
+    print(returnDict)
     return JsonResponse(returnDict, safe=False)
 
     # serveryDict = {}

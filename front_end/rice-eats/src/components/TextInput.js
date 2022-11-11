@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
 
-const TextInput = props => {
+export default function TextInput(props) {
+  const value = props.value ?? "";
+  const setValue = props.setValue ?? (() => undefined);
+
   return (
     <div>
-      <input
-        type="text"
-        value={props.value}
-        onChange={event => console.log("value changed!")}
-      />
+      <input type="text" value={value} onChange={event => setValue(event.target.value)}></input>
     </div>
-  );
-};
-
-export default TextInput;
+  )
+}

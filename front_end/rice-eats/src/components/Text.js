@@ -1,7 +1,5 @@
 import React from 'react';
 
-const types = ["default", "bold"]
-
 export default function Text(props) {
   const children = props.children;
   const white = props.white ?? false;

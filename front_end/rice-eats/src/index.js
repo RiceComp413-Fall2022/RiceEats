@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 

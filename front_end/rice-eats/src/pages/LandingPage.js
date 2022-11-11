@@ -1,20 +1,51 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { serveryList, serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
-import { PostReview, realRetrieveMenus, RetrieveMenus } from '../utils/APICalls';
+import { serveryName, serveryUrl, serveryMapUrl, getScreenSize } from '../config/config';
+import { getOrderedServeryList, setOrderedServeryList } from '../utils/GlobalVars';
+import { realRetrieveMenus } from '../utils/APICalls';
+import { getCurrentMeal } from '../utils/Meals';
 
+import { ErrorBoundary } from 'react-error-boundary';
 import ServeryCard from '../components/ServeryCard';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
-import Button from '../components/Button';
+import NoDataError from '../components/NoDataError';
+import LoadingWheel from '../components/LoadingWheel';
+
+function ServeryCards(props) {
+  const gridTemplateColumns = props.gridTemplateColumns;
+  const serveries = props.serveries;
+  const menus = props.menus;
+  const moveServeryToTop = props.moveServeryToTop;
+
+  return (
+    <div style={{
+      display: "grid", 
+      gridTemplateColumns: gridTemplateColumns, 
+      rowGap: 15, 
+      columnGap: 15
+    }}>
+      {serveries.map((servery, index) => (
+        <ServeryCard
+          name={serveryName[servery]}
+          overallRating={menus[servery].overallRating}
+          menuItems={menus[servery].menuItemDiet}
+          url={serveryUrl[servery]} 
+          mapUrl={serveryMapUrl[servery]}
+          moveToTop={() => moveServeryToTop(serveryName[servery])}
+          isTop={index === 0}
+          key={index}/>
+      ))}
+    </div>
+  );
+}
 
 export default function LandingPage() {
-  PostReview();
-  const [menus, setMenus] = useState(RetrieveMenus());
+  const [menus, setMenus] = useState();
   const [serveries, setServeries] = useState(getOrderedServeryList());
-  
-  useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
-  
+  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+
+  useEffect(() => realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]), [setMenus, dateMeal]);
 
   const moveServeryToTop = (serveryName) => {
     let newServeries = [...serveries];
@@ -23,9 +54,8 @@ export default function LandingPage() {
     setServeries(newServeries);
     setOrderedServeryList(newServeries);
   };
-
   const screenSize = getScreenSize();
-  const gridTemplateColumns = screenSize == "large" ? "1fr 1fr 1fr" : screenSize == "medium" ? "1fr 1fr" : "1fr";
+  const gridTemplateColumns = screenSize === "large" ? "1fr 1fr 1fr" : screenSize === "medium" ? "1fr 1fr" : "1fr";
   
   return (
     <div style={{
@@ -37,30 +67,23 @@ export default function LandingPage() {
       </div>
 
       <div style={{marginBottom: 30}}>
-        <MealPicker />
+        <MealPicker dateMeal={dateMeal} setDateMeal={setDateMeal} />
       </div>
       
-      <div style={{
-        display: "grid", 
-        gridTemplateColumns: gridTemplateColumns, 
-        rowGap: 15, 
-        columnGap: 15
-      }}>
-        {menus == undefined && (
-          <div> hi</div>
-        )}
-        {serveries.map((servery, index) => (
-          <ServeryCard
-            name={serveryName[servery]}
-            overallRating={menus[servery].overallRating}
-            menuItems={menus[servery].menuItemDiet}
-            url={serveryUrl[servery]} 
-            mapUrl={serveryMapUrl[servery]}
-            moveToTop={() => moveServeryToTop(serveryName[servery])}
-            isTop={index == 0}
-            key={index}/>
-        ))}
-      </div>
+      {!menus &&
+        <div style={{marginTop:"20%", display:"flex", justifyContent:"center"}}>
+          <LoadingWheel />
+        </div>
+      }
+      {menus &&
+        <ErrorBoundary FallbackComponent={NoDataError}>
+          <ServeryCards 
+            gridTemplateColumns={gridTemplateColumns} 
+            serveries={serveries} 
+            menus={menus} 
+            moveServeryToTop={moveServeryToTop}/>
+        </ErrorBoundary>
+      }
     </div>
   );
 }
