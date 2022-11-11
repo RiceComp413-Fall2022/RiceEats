@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Text from './Text';
 import { BeatLoader } from 'react-spinners';
 
 export default function LoadingWheel() {

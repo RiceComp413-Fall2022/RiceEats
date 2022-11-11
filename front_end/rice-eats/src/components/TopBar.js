@@ -4,31 +4,48 @@ import Text from "./Text";
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import TextInput from './TextInput';
+import { getIsLoggedIn, setIsLoggedIn, setNetId } from '../utils/GlobalVars';
 
 export default function TopBar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [username, setUsername] = useState("");
+  const [localIsLoggedIn, setLocalIsLoggedIn] = useState(getIsLoggedIn());
   const navigate = useNavigate();
+  
   const onLogoClick = () => {
     navigate("/");
   };
+
   const onLoginClick = () => {
     setShowLoginModal(true);
   };
+
   const onCloseModal = () => {
     setShowLoginModal(false);
   };
+
   const onLogin = () => {
-    // check validity
+    // TODO: check validity
+    const isValid = username.match(/^(([A-z])([A-z])([A-z])?([0-9])+)$/);
+    if (!isValid) {
+      alert("Invalid NetID!");
+      return;
+    }
     
     // save in local data
-    console.log(username);
-
-    // update top bar look
+    setNetId(username);
+    setIsLoggedIn(true);
+    setLocalIsLoggedIn(true);
 
     // close modal
     setShowLoginModal(false);
   };
+
+  const onLogOut = () => {
+    setIsLoggedIn(false);
+    setLocalIsLoggedIn(false);
+    setUsername("");
+  }
 
   return (
     <div style={{
@@ -42,11 +59,22 @@ export default function TopBar() {
         <img style={{height: "100%", width: "100%", display: "block"}}
           src="logo4.png" alt="rice eats logo"/>
       </div>
-      <Button onClick={onLoginClick}>
-        <Text white={true} bold={true}>
-          SIGN IN
-        </Text>
-      </Button>
+
+      {!localIsLoggedIn &&
+        <Button onClick={onLoginClick}>
+          <Text white={true} bold={true}>
+            SIGN IN
+          </Text>
+        </Button>
+      }
+      {localIsLoggedIn &&
+        <Button onClick={onLogOut}>
+          <Text white bold>
+            LOG OUT
+          </Text>
+        </Button>
+      }
+
       <Modal show={showLoginModal} onHide={onCloseModal}>
         <Modal.Header closeButton>
           Login

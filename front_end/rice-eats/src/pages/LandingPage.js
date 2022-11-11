@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { serveryName, serveryUrl, serveryMapUrl, getOrderedServeryList, setOrderedServeryList, getScreenSize } from '../config/config';
+import { serveryName, serveryUrl, serveryMapUrl, getScreenSize } from '../config/config';
+import { getOrderedServeryList, setOrderedServeryList } from '../utils/GlobalVars';
 import { realRetrieveMenus } from '../utils/APICalls';
 import { getCurrentMeal } from '../utils/Meals';
 

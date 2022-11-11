@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Rating from '@mui/material/Rating';
 
 const ReviewTextInput = props => {
+  const actualReview = props.actualReview;
   const setActualReview = props.setActualReview;
   const index = props.index;
-
-  function editCurrentReviews(currentReviews, newValue) {
-    currentReviews[index] = newValue;
-    return currentReviews;
-  }
+  const [rating, setRating] = useState(0);
+  
+  useEffect(() => setRating(actualReview[index] ?? 0), 
+    [actualReview, index]);
 
   return (
     <div>
-      <input
-        type="text"
-        value={props.value}
-        onChange={event => setActualReview((currentReviews) => 
-          {return editCurrentReviews(currentReviews, event.target.value)})}
-      />
+      <Rating 
+        value={rating} 
+        onChange={(event, rating) => 
+          setActualReview((currentReviews) => {
+            const newReviews = [...currentReviews];
+            newReviews[index] = rating;
+            return newReviews;
+          })
+        }
+        />
     </div>
   );
 };

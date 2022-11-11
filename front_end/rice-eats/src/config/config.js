@@ -26,7 +26,8 @@ export const serveryMapUrl = {
     "Baker": "https://www.google.com/maps/place/Baker+College/@29.7172288,-95.4011985,17z/data=!3m1!4b1!4m5!3m4!1s0x8640c192b6342669:0x318e651a70c32638!8m2!3d29.7172288!4d-95.3990098"
 };
 
-export const backendUrl = "https://rice-eats-backend.herokuapp.com";//https://rice-eats-backend.herokuapp.com//http://127.0.0.1:8000
+export const backendUrl = "https://rice-eats-backend.herokuapp.com";
+// export const backendUrl = "http://127.0.0.1:8000";
 
 export const serveryColor = {
     "South": "rgb(58, 64, 90)",
@@ -110,28 +111,6 @@ export const availableServeries = {
         "Lunch": ["North", "South", "West", "Seibel"],
         "Dinner": ["North", "South", "West", "Seibel"],
     },
-}
-
-export const getOrderedServeryList = () => {
-    try {
-        const serializedState = localStorage.getItem('orderedServeryList');
-        if (serializedState == null) {
-            return serveryList;
-        } else {
-            return JSON.parse(serializedState)
-        }
-    } catch (e) {
-        console.log("ERROR in getOrderedServeryList");
-    }
-};
-
-export const setOrderedServeryList = (newList) => {
-    try {
-        const serializedState = JSON.stringify(newList);
-        localStorage.setItem('orderedServeryList', serializedState);
-    } catch (e) {
-        console.log("ERROR in setOrderedServeryList");
-    }
 };
 
 export const getScreenSize = () => {
@@ -142,4 +121,4 @@ export const getScreenSize = () => {
     } else {
         return "small";
     }
-}
+};

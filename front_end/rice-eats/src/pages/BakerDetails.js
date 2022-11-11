@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RetrieveMenus, realRetrieveMenus } from '../utils/APICalls';
+import { realRetrieveMenus } from '../utils/APICalls';
 import { getCurrentMeal } from '../utils/Meals';
 import ReviewMenu from '../components/ReviewMenu';
 

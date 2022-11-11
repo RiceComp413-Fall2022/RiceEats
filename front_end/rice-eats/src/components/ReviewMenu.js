@@ -1,16 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
-import TextInput from '../components/TextInput';
 import Table from 'react-bootstrap/Table';
 import LoadingWheel from '../components/LoadingWheel';
 import Button from './Button';
 import Text from './Text';
+import ReviewTextInput from './ReviewTextInput';
+import CommentsTextInput from './CommentsTextInput';
+import { PostReview } from '../utils/APICalls';
+import { useNavigate } from 'react-router';
+import { getIsLoggedIn, getNetId } from '../utils/GlobalVars';
 
 export default function ReviewMenu(props) {
+  const servery = props.servery ?? "Baker";
   const menu = props.menu;
   const dateMeal = props.dateMeal;
   const setDateMeal = props.setDateMeal;
+
+  const [actualReview, setActualReview] = useState();
+  const [reviewComments, setReviewComments] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const menuLength = menu?.menuItemDiet?.length ?? 0;
+    setActualReview(new Array(menuLength).fill(null));
+    setReviewComments(new Array(menuLength));
+  }, [menu, setActualReview, setReviewComments]);
+
+  const postReview = () => {
+    let localReviews = [];
+    for (let i = 0; i < menu.menuItemDiet.length; i++) {
+      if (actualReview[i]) { // only add items that have been reivewed
+        let itemReview = {};
+        itemReview["menuItemDietId"] = menu.menuItemDiet[i].id;
+        itemReview["rating"] = actualReview[i];
+        itemReview["comments"] = reviewComments[i] ?? "";
+        localReviews.push(itemReview);
+      }
+    }
+
+    // Verify that we are ready to post a review (logged in and rated at least one item)
+    if (localReviews.length === 0) {
+      alert("Must provide at least one star rating!");
+      return;
+    }
+
+    const isLoggedIn = getIsLoggedIn();
+    const netId = getNetId();
+    if (!isLoggedIn) {
+      alert("Must log in first!");
+      return;
+    }
+
+    PostReview(servery, dateMeal[0], dateMeal[1], netId, localReviews);
+    navigate("/");
+  };
 
   return (
     <>
@@ -45,13 +89,13 @@ export default function ReviewMenu(props) {
                 <tr key={index}>
                   <td>{item.menuItem_id}</td>
                   <td>{item.rating}</td>
-                  <td><TextInput/></td>
-                  <td><TextInput/></td>
+                  <td><ReviewTextInput index={index} actualReview={actualReview} setActualReview={setActualReview}/></td>
+                  <td><CommentsTextInput index={index} setReviewComments={setReviewComments}/></td>
                 </tr>
               ))}
               </tbody>
             </Table>
-            <a href='/'><Button><Text>Submit</Text></Button></a>
+            <Button onClick={postReview}><Text>Submit</Text></Button>
           </div>
         </div>
       }
