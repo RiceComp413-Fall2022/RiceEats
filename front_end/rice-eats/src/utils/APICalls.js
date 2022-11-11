@@ -1,11 +1,10 @@
 import axios from "axios";
 
-export function PostReview(serveryName, itemReviews) {
-    console.log(itemReviews);
+export function PostReview(serveryName, currentDate, itemReviews) {
     axios.post("http://127.0.0.1:8000/submitreview", {
         serveryName: serveryName,
         //fix the date to be a function and return current date
-        date: "2022-10-22",
+        date: currentDate,
         mealType: "Breakfast",
         reviewerNetId: "mdl8",
         reviewerEmail: "mdl8@rice.edu",

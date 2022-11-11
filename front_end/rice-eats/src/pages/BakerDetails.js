@@ -11,33 +11,36 @@ export default function BakerDetails() {
   const baker_menu = menus.Baker;
   const [actualReview, setActualReview] = useState(new Array(baker_menu.menuItemDiet.length));
   const [reviewComments, setReviewComments] = useState(new Array(baker_menu.menuItemDiet.length));
-  const [allReviews, setAllReviews] = useState([]);
-
+  //const [allReviews, setAllReviews] = useState(new Array(baker_menu.menuItemDiet.length));
+  
   useEffect(() => realRetrieveMenus((response) => {
-    console.log(response);
     setMenus(response.data);
-    console.log(response.data);
   }), 
     [setMenus]);
 
-  useEffect(() => {
-    console.log(actualReview)
+  // useEffect(() => {
+    
+  // });
+
+  function post_review() {
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${year}-${month}-${day}`;
+
+    let localReviews = new Array(baker_menu.menuItemDiet.length);
     for (let i = 0; i < baker_menu.menuItemDiet.length; i++) {
       let itemReview = {};
       itemReview["menuItemDietId"] = baker_menu.menuItemDiet[i].id;
       // console.log(baker_menu.menuItemDiet[i])
-      console.log("actualreview " + actualReview[i]);
       itemReview["rating"] = actualReview[i] ?? "";
       itemReview["comments"] = reviewComments[i] ?? "";
-      let localReviews = allReviews;
       localReviews[i] = itemReview;
-      setAllReviews(localReviews);
-    } 
-  });
-
-  function post_review() {
-    console.log(allReviews);
-    PostReview("Baker", allReviews);
+    }
+    //setAllReviews(localReviews);
+    //console.log(localReviews);
+    PostReview("Baker", currentDate, localReviews);
   }
 
   return (
