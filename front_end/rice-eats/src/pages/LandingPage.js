@@ -9,10 +9,12 @@ import MealPicker from '../components/MealPicker';
 import Button from '../components/Button';
 
 export default function LandingPage() {
+  PostReview();
   const [menus, setMenus] = useState(RetrieveMenus());
   const [serveries, setServeries] = useState(getOrderedServeryList());
+  
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data)), [setMenus]);
-  PostReview();
+  
 
   const moveServeryToTop = (serveryName) => {
     let newServeries = [...serveries];

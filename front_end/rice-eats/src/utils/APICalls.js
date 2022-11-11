@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function PostReview() {
     axios.post("http://127.0.0.1:8000/submitreview", {
-        serveryName: "South",
+        serveryName: "North",
         date: "2022-10-05",
         mealType: "Breakfast",
         reviewerNetId: "mdl8",
@@ -12,7 +12,7 @@ export function PostReview() {
         comments: "this was not bad......",
         itemReviews: [
             {
-                menuItemDietId: 5, // tofu stir fry
+                menuItemDietId: 5,
                 rating: 3,
                 comments: "this is some bomb ass mac n cheese"
             }
