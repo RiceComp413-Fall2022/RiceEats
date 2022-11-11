@@ -3,16 +3,15 @@ import { subDays, addDays } from "date-fns";
 
 export const getCurrentMeal = () => {
   const date = new Date();
-  const dateString = date.toISOString().split('T')[0];
+  const dateString = getDateStringFromDate(date);
   const hour = date.getHours();
-  let mealType = "Breakfast";
+  let mealType = "Lunch"; // todo: replace with breakfast if you want ot do that ig
   if (hour >= 11) {
     mealType = "Lunch";
   }
   if (hour >= 14) {
     mealType = "Dinner";
   }
-  // console.log([dateString, mealType]);
   return [dateString, mealType];
 };
 
@@ -24,7 +23,7 @@ export const getNextMeal = (date, mealType) => {
   } else {
     const d = createDateFromDateString(date);
     const newD = addDays(d, 1);
-    const dateString = newD.toISOString().split('T')[0];
+    const dateString = getDateStringFromDate(newD);
     return [dateString, "Lunch"];
   }
 };
@@ -33,7 +32,7 @@ export const getPrevMeal = (date, mealType) => {
   if (mealType === "Lunch") {
     const d = createDateFromDateString(date);
     const newD = subDays(d, 1);
-    const dateString = newD.toISOString().split('T')[0];
+    const dateString = getDateStringFromDate(newD);
     return [dateString, "Dinner"];
   } else if (mealType === "Lunch") {
     return [date, "Breakfast"];
@@ -72,3 +71,11 @@ const createDateFromDateString = (date) => {
   d.setDate(dateStringParts[2]);
   return d;
 };
+
+const getDateStringFromDate = (date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const dateString = year + "-" + month + "-" + day;
+  return dateString;
+}

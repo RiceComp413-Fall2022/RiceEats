@@ -3,7 +3,7 @@ import Button from "./Button";
 import Text from "./Text";
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
-import TextInput2 from './TextInput2';
+import TextInput from './TextInput';
 
 export default function TopBar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -20,9 +20,14 @@ export default function TopBar() {
   };
   const onLogin = () => {
     // check validity
+    
     // save in local data
+    console.log(username);
+
     // update top bar look
+
     // close modal
+    setShowLoginModal(false);
   };
 
   return (
@@ -47,8 +52,10 @@ export default function TopBar() {
           Login
         </Modal.Header>
         <Modal.Body>
-          Enter login info here
-          <TextInput2 value={username} setValue={setUsername}/>
+          <div style={{display:"inline"}}>
+            <Text>Enter NetID:</Text>
+            <TextInput value={username} setValue={setUsername}/>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={onCloseModal}>Cancel</Button>

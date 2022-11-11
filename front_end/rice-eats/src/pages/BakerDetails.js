@@ -10,8 +10,6 @@ export default function BakerDetails() {
 
   useEffect(() => {
     if (dateMeal) {
-      // console.log("what");
-      // console.log(dateMeal);
       realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]);
     }
   }, [setMenus, dateMeal]);
