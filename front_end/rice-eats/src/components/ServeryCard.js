@@ -29,11 +29,11 @@ export default function ServeryCard(props) {
       }}>
         <div style={{marginBottom: 10}}>
           <Text large={true} bold={true}>
-            {name} ({overallRating}⭐)
+            {name} {overallRating !== -1 && <>({overallRating}⭐)</>}
           </Text>
           {menuItems.map((menuItem, index) => (
             <div key={index}>
-              {menuItem.menuItem_id} ({menuItem.rating})
+              {menuItem.menuItem_id} ({menuItem.rating !== -1 && <>{menuItem.rating}</>}{menuItem.rating === -1 && <>new!</>})
             </div>
           ))}
         </div>

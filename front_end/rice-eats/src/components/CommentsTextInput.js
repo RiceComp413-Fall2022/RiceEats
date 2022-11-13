@@ -1,6 +1,8 @@
 import React from "react";
+import TextInput from "./TextInput";
 
 const CommentsTextInput = props => {
+  const value = props.value;
   const setReviewComments = props.setReviewComments;
   const index = props.index;
 
@@ -11,12 +13,9 @@ const CommentsTextInput = props => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={props.value}
-        onChange={event => setReviewComments((currentReviews) => 
-          {return editCurrentComments(currentReviews, event.target.value)})}
-      />
+      <TextInput value={value} setValue={(newValue) => 
+        setReviewComments((currentReviews) => 
+          editCurrentComments(currentReviews, newValue))} />
     </div>
   );
 };

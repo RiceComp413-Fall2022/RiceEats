@@ -1,4 +1,5 @@
 import React from 'react';
+import { TextField } from '@mui/material';
 
 export default function TextInput(props) {
   const value = props.value ?? "";
@@ -6,7 +7,11 @@ export default function TextInput(props) {
 
   return (
     <div>
-      <input type="text" value={value} onChange={event => setValue(event.target.value)}></input>
+      <TextField 
+        value={value} 
+        onChange={event => setValue(event.target.value)} 
+        size="small"/>
+      {/* <input type="text" value={value} onChange={event => setValue(event.target.value)}></input> */}
     </div>
   )
 }

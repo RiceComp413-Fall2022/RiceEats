@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 import { getIsLoggedIn, getNetId } from '../utils/GlobalVars';
 
 export default function ReviewMenu(props) {
-  const servery = props.servery ?? "Baker";
+  const servery = props.servery;
   const menu = props.menu;
   const dateMeal = props.dateMeal;
   const setDateMeal = props.setDateMeal;
@@ -88,7 +88,7 @@ export default function ReviewMenu(props) {
               {menu.menuItemDiet.map((item, index) => (
                 <tr key={index}>
                   <td>{item.menuItem_id}</td>
-                  <td>{item.rating}</td>
+                  <td>{item.rating !== -1 && <>{item.rating}</>}{item.rating === -1 && <>new!</>}</td>
                   <td><ReviewTextInput index={index} actualReview={actualReview} setActualReview={setActualReview}/></td>
                   <td><CommentsTextInput index={index} setReviewComments={setReviewComments}/></td>
                 </tr>

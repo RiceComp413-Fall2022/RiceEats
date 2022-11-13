@@ -15,6 +15,6 @@ export default function BakerDetails() {
   }, [setMenus, dateMeal]);
 
   return (
-    <ReviewMenu menu={baker_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
+    <ReviewMenu servery="Baker" menu={baker_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
   );
 }

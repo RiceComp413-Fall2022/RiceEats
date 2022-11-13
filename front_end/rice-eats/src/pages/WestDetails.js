@@ -15,6 +15,6 @@ export default function WestDetails() {
   }, [setMenus, dateMeal]);
 
   return (
-    <ReviewMenu menu={west_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
+    <ReviewMenu servery="West" menu={west_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
   );
 }

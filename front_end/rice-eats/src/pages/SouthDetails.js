@@ -15,6 +15,6 @@ export default function SouthDetails() {
   }, [setMenus, dateMeal]);
 
   return (
-    <ReviewMenu menu={south_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
+    <ReviewMenu servery="South" menu={south_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
   );
 }

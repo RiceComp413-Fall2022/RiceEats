@@ -15,6 +15,6 @@ export default function SeibelDetails() {
   }, [setMenus, dateMeal]);
 
   return (
-    <ReviewMenu menu={seibel_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
+    <ReviewMenu servery="Seibel" menu={seibel_menu} dateMeal={dateMeal} setDateMeal={setDateMeal} />
   );
 }
