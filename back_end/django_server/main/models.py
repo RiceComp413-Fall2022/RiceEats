@@ -75,6 +75,22 @@ class MenuItemDiet(models.Model):
             )
         ]
 
+class MenuItemDietRating(models.Model):
+    menuItemDiet = models.ForeignKey(MenuItemDiet, on_delete=models.CASCADE)
+    servery = models.ForeignKey(Servery, on_delete=models.CASCADE)
+    rating = models.DecimalField(default=None, blank=True, null=True, decimal_places=2, max_digits=3)
+    numReviews = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.menuItemDiet.menuItem.name) + " @ " + str(self.servery) + " rating: " + str(self.rating)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['menuItemDiet', 'servery'], name='menu item diet rating constraint'
+            )
+        ]
+
 class MenuItemDietServed(models.Model):
     menuItemDiet = models.ForeignKey(MenuItemDiet, on_delete=models.CASCADE)
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE)

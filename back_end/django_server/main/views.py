@@ -87,11 +87,36 @@ def serveryMenus(response):
             #menuItemsList.append()
             menuItemDietServed_dict = MENUITEMDIETSERVED.menuItemDiet.__dict__
             menuItemDiet = MENUITEMDIETSERVED.menuItemDiet.menuItem
+            servery = MENUITEMDIETSERVED.meal.servery
             ReviewItem.objects.all().filter()
-            menuItemDietServed_dict['rating'] = 5
+            try:
+                menuItemDietRating = MenuItemDietRating.objects.get(menuItemDiet = MENUITEMDIETSERVED.menuItemDiet, servery = servery)
+            except MenuItemDietRating.DoesNotExist:
+                menuItemDietRating = MenuItemDietRating(menuItemDiet = MENUITEMDIETSERVED.menuItemDiet, servery = servery)
+                menuItemDietRating.save()
+
+            # menuItemDietRating's rating is still None (we reset the table every week)
+            avgRating = menuItemDietRating.rating
+            print("avgRating", avgRating)
+            if avgRating is None:
+                # Calculate Ratings once and save it
+                sum = 0
+                count = 0
+                print(ReviewItem.objects.all())
+                for review_item in ReviewItem.objects.all():
+                    if review_item.menuItemDietServed.menuItemDiet.menuItem.name == menuItemDiet.name and review_item.menuItemDietServed.meal.servery.name == servery.name:
+                        sum += review_item.rating
+                        count += 1
+                if count == 0:
+                    avgRating = -1
+                else:
+                    avgRating = sum / count
+                menuItemDietRating.rating = avgRating
+                menuItemDietRating.numReviews = count
+                menuItemDietRating.save()
+            menuItemDietServed_dict['rating'] = avgRating
             menuItemDietServed_dict.pop('_state')
             menuItemsList.append(menuItemDietServed_dict)
-            print(MENUITEMDIETSERVED.menuItemDiet.__dict__)
         serveryDict['menuItemDiet'] = menuItemsList
         returnDict[SERVERY.name] = serveryDict
     print(returnDict)
@@ -134,7 +159,6 @@ def submitReview(response):
     fullReviewComments = requestDict["comments"]
     itemReviews = requestDict["itemReviews"] # this is a list
 
-
     # Create a new Meal instance (for input to full review)
     meal = None
     if Meal.objects.filter(servery=Servery.objects.get(pk=servery), mealType=MealType.objects.get(pk=mealType), servedDate=date).exists():
@@ -155,14 +179,11 @@ def submitReview(response):
         fullReview = FullReview(reviewer=reviewer, meal = meal, reviewText = fullReviewComments)
         fullReview.save()
     
-    # print("SHEEEEEEEEEEEEEEEEESH", list(MenuItemDiet.objects.all())[0].id)
     # for every item's review, create an instance and save into database
-    print(MenuItemDiet.objects.all())
     for review in itemReviews:
         # front end can send this back after we send it to them?
         menuItemDietId = review["menuItemDietId"]
         # search for the MenuItemDiet instance of this menu item
-        print("YOOOOOOOOOOOOOOOOO", menuItemDietId)
         menuItemDiet = MenuItemDiet.objects.get(pk=menuItemDietId)
 
         menuItemDietServed = None
@@ -181,3 +202,8 @@ def submitReview(response):
             reviewItem.save()
 
     return HttpResponse('')
+
+# called by each serveryMenus' menuItemDiet to calculate its current rating
+def calculateRating(response):
+
+    return
