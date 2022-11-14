@@ -82,7 +82,7 @@ export default function TopBar() {
         <Modal.Body>
           <div style={{display:"inline"}}>
             <Text>Enter NetID:</Text>
-            <TextInput value={username} setValue={setUsername}/>
+            <TextInput value={username} setValue={setUsername} autocomplete/>
           </div>
         </Modal.Body>
         <Modal.Footer>

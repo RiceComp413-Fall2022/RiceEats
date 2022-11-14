@@ -13,7 +13,6 @@ export default function TextInput(props) {
         onChange={event => setValue(event.target.value)} 
         size="small"
         autoComplete={autocomplete ? "on" : "off"}/>
-      {/* <input type="text" value={value} onChange={event => setValue(event.target.value)}></input> */}
     </div>
   )
 }
