@@ -27,6 +27,8 @@ export default function ReviewMenu(props) {
     setReviewComments(new Array(menuLength));
   }, [menu, setActualReview, setReviewComments]);
 
+  // useEffect(() => console.log(reviewComments), [reviewComments]);
+
   const postReview = () => {
     let localReviews = [];
     for (let i = 0; i < menu.menuItemDiet.length; i++) {
@@ -85,17 +87,17 @@ export default function ReviewMenu(props) {
               </tr>
               </thead>
               <tbody>
-              {menu.menuItemDiet.map((item, index) => (
+              {actualReview && reviewComments && menu.menuItemDiet.map((item, index) => (
                 <tr key={index}>
                   <td>{item.menuItem_id}</td>
                   <td>{item.rating !== -1 && <>{item.rating}</>}{item.rating === -1 && <>new!</>}</td>
                   <td><ReviewTextInput index={index} actualReview={actualReview} setActualReview={setActualReview}/></td>
-                  <td><CommentsTextInput index={index} setReviewComments={setReviewComments}/></td>
+                  <td><CommentsTextInput index={index} reviewComments={reviewComments} setReviewComments={setReviewComments}/></td>
                 </tr>
               ))}
               </tbody>
             </Table>
-            <Button onClick={postReview}><Text>Submit</Text></Button>
+            <Button onClick={postReview}><Text white bold>Submit</Text></Button>
           </div>
         </div>
       }
