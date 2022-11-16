@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Text from './Text';
 import Button from "./Button";
-import { getMealString1, getMealString2, getNextMeal, getPrevMeal } from '../utils/Meals';
+import { getMealString1, getMealString2, getMealString3, getNextMeal, getPrevMeal } from '../utils/Meals';
 
 export default function MealPicker(props) {
   // TODO: make this do something lol
@@ -10,10 +10,12 @@ export default function MealPicker(props) {
   // const [dateMeal, setDateMeal] = useState(getCurrentMeal());
   const [mealString1, setMealString1] = useState("Friday, Dinner");
   const [mealString2, setMealString2] = useState("5:30 PM - 7:30 PM");
+  const [mealString3, setMealString3] = useState("11/16/22");
 
   useEffect(() => {
     setMealString1(getMealString1(dateMeal[0], dateMeal[1]));
     setMealString2(getMealString2(dateMeal[0], dateMeal[1]));
+    setMealString3(getMealString3(dateMeal[0], dateMeal[1]));
   }, [dateMeal]);
 
   const onClickPrevMeal = () => {
@@ -46,6 +48,7 @@ export default function MealPicker(props) {
         alignItems: "center",
         alignContent: "center"
       }}>
+        <Text large bold>{mealString3}</Text>
         <Text large bold>{mealString1}</Text>
         <Text large bold>{mealString2}</Text>
       </div>
