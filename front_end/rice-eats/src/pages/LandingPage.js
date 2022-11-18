@@ -55,7 +55,7 @@ export default function LandingPage() {
     setOrderedServeryList(newServeries);
   };
   const screenSize = getScreenSize();
-  const gridTemplateColumns = screenSize === "large" ? "1fr 1fr 1fr" : screenSize === "medium" ? "1fr 1fr" : "1fr";
+  const gridTemplateColumns = screenSize === "large" ? "1fr 1fr" : screenSize === "medium" ? "1fr 1fr" : "1fr";
   
   return (
     <div style={{
