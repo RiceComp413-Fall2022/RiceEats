@@ -5,6 +5,8 @@ export default function TextInput(props) {
   const value = props.value ?? "";
   const setValue = props.setValue ?? (() => undefined);
   const autocomplete = props.autocomplete ?? false;
+  const label = props.label ?? "";
+  const fullWidth = props.fullWidth ?? false;
 
   return (
     <div>
@@ -12,7 +14,9 @@ export default function TextInput(props) {
         value={value} 
         onChange={event => setValue(event.target.value)} 
         size="small"
-        autoComplete={autocomplete ? "on" : "off"}/>
+        autoComplete={autocomplete ? "on" : "off"}
+        label={label}
+        fullWidth={fullWidth}/>
     </div>
   )
 }

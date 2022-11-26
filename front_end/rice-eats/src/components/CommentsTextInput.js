@@ -6,20 +6,15 @@ const CommentsTextInput = props => {
   const setReviewComments = props.setReviewComments;
   const index = props.index;
 
-  // function editCurrentComments(currentComments, newValue) {
-  //   currentComments[index] = newValue;
-  //   return currentComments;
-  // }
-
   return (
-    <div>
-      <TextInput value={reviewComments[index]} setValue={(newValue) => {
+    <div style={{width:"100%"}}>
+      <TextInput fullWidth value={reviewComments[index]} setValue={(newValue) => {
         setReviewComments((currentComments) => {
           let newComments = [...currentComments];
           newComments[index] = newValue;
           return newComments;
         });
-      }} />
+      }} label="Comments"/>
     </div>
   );
 };

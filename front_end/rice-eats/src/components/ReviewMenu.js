@@ -10,6 +10,7 @@ import CommentsTextInput from './CommentsTextInput';
 import { PostReview } from '../utils/APICalls';
 import { useNavigate } from 'react-router';
 import { getIsLoggedIn, getNetId } from '../utils/GlobalVars';
+import ReviewItem from './ReviewItem';
 
 export default function ReviewMenu(props) {
   const servery = props.servery;
@@ -76,7 +77,22 @@ export default function ReviewMenu(props) {
           <div style={{marginBottom: 30}}>
             <MealPicker dateMeal={dateMeal} setDateMeal={setDateMeal}/>
           </div>
+          
           <div>
+            {actualReview && reviewComments && menu.menuItemDiet.map((item, index) => (
+              <div style={{marginBottom: "10px"}}>
+                <ReviewItem 
+                  item={item}
+                  index={index}
+                  reviewComments={reviewComments}
+                  setReviewComments={setReviewComments}
+                  actualReview={actualReview}
+                  setActualReview={setActualReview} />
+              </div>
+            ))}
+          </div>
+
+          {/* <div>
             <Table striped bordered hover>
               <thead>
               <tr>
@@ -97,8 +113,11 @@ export default function ReviewMenu(props) {
               ))}
               </tbody>
             </Table>
-            <Button onClick={postReview}><Text white bold>Submit</Text></Button>
-          </div>
+          </div> */}
+
+          <Button onClick={postReview}>
+            <Text white bold>Submit</Text>
+          </Button>
         </div>
       }
     </>

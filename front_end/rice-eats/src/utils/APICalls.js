@@ -26,7 +26,7 @@ export function realRetrieveMenus(func, date, mealType) {
         mealType: mealType
     }
     , {'Content-Type': 'application/json'}).then((response) => {
-        // console.log(response);
+        console.log(response);
         func(response)
     });
 }

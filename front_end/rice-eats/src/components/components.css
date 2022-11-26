@@ -7,3 +7,9 @@
 .hover-background:hover {
   background-color: rgba(.3, .3, .3, .2);
 }
+.hover-background1 {
+  background-color: rgba(.3, .3, .3, .1);
+}
+.hover-background1:hover {
+  background-color: rgba(.3, .3, .3, .2);
+}
