@@ -19,7 +19,8 @@ export default function ReviewItem(props) {
             display: "flex", 
             justifyContent: "space-between",
             width: "100%",
-            gap: "10px"}}>
+            gap: "10px",
+            alignItems: "center"}}>
             <Text>{item.menuItem_id} ({item.rating !== -1 && <>{item.rating}</>}{item.rating === -1 && <>new!</>})</Text>
             <ReviewTextInput index={index} actualReview={actualReview} setActualReview={setActualReview}/>
           </div>

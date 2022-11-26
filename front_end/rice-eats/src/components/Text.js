@@ -5,6 +5,7 @@ export default function Text(props) {
   const white = props.white ?? false;
   const bold = props.bold ?? false;
   const large = props.large ?? false;
+  const centerText = props.centerText ?? false;
   
   return (
     <div style={{
@@ -12,7 +13,8 @@ export default function Text(props) {
       fontSize: large ? 28 : 16,
       color: white ? "white" : "black",
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
+      textAlign: centerText ? "center" : ""
     }}>
       {children}
     </div>

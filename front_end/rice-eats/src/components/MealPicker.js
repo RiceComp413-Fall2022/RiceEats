@@ -48,9 +48,9 @@ export default function MealPicker(props) {
         alignItems: "center",
         alignContent: "center"
       }}>
-        <Text large bold>{mealString3}</Text>
-        <Text large bold>{mealString1}</Text>
-        <Text large bold>{mealString2}</Text>
+        <Text large bold centerText>{mealString3}</Text>
+        <Text large bold centerText>{mealString1}</Text>
+        <Text large bold centerText>{mealString2}</Text>
       </div>
 
       {/* Right arrow */}

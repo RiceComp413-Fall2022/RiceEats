@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import TextInput from './TextInput';
 import { getIsLoggedIn, setIsLoggedIn, setNetId } from '../utils/GlobalVars';
+import { getScreenSize } from '../config/config';
 
 export default function TopBar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [username, setUsername] = useState("");
   const [localIsLoggedIn, setLocalIsLoggedIn] = useState(getIsLoggedIn());
+  const logoScaling = getScreenSize() === "small" ? "95%" : "100%";
   const navigate = useNavigate();
   
   const onLogoClick = () => {
@@ -56,7 +58,7 @@ export default function TopBar() {
       paddingTop: 10,
       paddingBottom: 10}}>
       <div onClick={onLogoClick} style={{cursor: "pointer", height: "100%"}}>
-        <img style={{height: "100%", width: "100%", display: "block"}}
+        <img style={{height: logoScaling, width: logoScaling, display: "block"}}
           src="logo4.png" alt="rice eats logo"/>
       </div>
 
