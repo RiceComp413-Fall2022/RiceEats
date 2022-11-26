@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
-import Table from 'react-bootstrap/Table';
 import LoadingWheel from '../components/LoadingWheel';
 import Button from './Button';
 import Text from './Text';
-import ReviewTextInput from './ReviewTextInput';
-import CommentsTextInput from './CommentsTextInput';
 import { PostReview } from '../utils/APICalls';
 import { useNavigate } from 'react-router';
 import { getIsLoggedIn, getNetId } from '../utils/GlobalVars';
 import ReviewItem from './ReviewItem';
+import { getPageMargin } from '../config/config';
 
 export default function ReviewMenu(props) {
   const servery = props.servery;
   const menu = props.menu;
   const dateMeal = props.dateMeal;
   const setDateMeal = props.setDateMeal;
+  const pageMargin = getPageMargin();
 
   const [actualReview, setActualReview] = useState();
   const [reviewComments, setReviewComments] = useState();
@@ -68,8 +67,8 @@ export default function ReviewMenu(props) {
       }
       {menu &&
         <div style={{
-          marginLeft: "12%",
-          marginRight: "12%"
+          marginLeft: pageMargin,
+          marginRight: pageMargin
           }}>
           <div style={{marginBottom: 15}}>
             <TopBar />

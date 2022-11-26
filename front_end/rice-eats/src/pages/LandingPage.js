@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { serveryName, serveryUrl, serveryMapUrl, getScreenSize } from '../config/config';
+import { serveryName, serveryUrl, serveryMapUrl, getScreenSize, getPageMargin } from '../config/config';
 import { getOrderedServeryList, setOrderedServeryList } from '../utils/GlobalVars';
 import { realRetrieveMenus } from '../utils/APICalls';
 import { getCurrentMeal } from '../utils/Meals';
@@ -56,11 +56,12 @@ export default function LandingPage() {
   };
   const screenSize = getScreenSize();
   const gridTemplateColumns = screenSize === "large" ? "1fr 1fr" : screenSize === "medium" ? "1fr 1fr" : "1fr";
+  const pageMargin = getPageMargin();
   
   return (
     <div style={{
-      marginLeft: "12%",
-      marginRight: "12%"
+      marginLeft: pageMargin,
+      marginRight: pageMargin
     }}>
       <div style={{marginBottom: 15}}>
         <TopBar />

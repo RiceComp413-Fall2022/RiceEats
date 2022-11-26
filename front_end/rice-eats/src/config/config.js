@@ -122,3 +122,11 @@ export const getScreenSize = () => {
         return "small";
     }
 };
+
+export const getPageMargin = () => {
+    if (getScreenSize() === "small") {
+        return "4%";
+    } else {
+        return "12%";
+    }
+}
