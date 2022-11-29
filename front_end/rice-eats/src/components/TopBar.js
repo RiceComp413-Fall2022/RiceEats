@@ -88,8 +88,8 @@ export default function TopBar() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onCloseModal}>Cancel</Button>
-          <Button onClick={onLogin}>Login</Button>
+          <Button onClick={onCloseModal}><Text bold white>Cancel</Text></Button>
+          <Button onClick={onLogin}><Text bold white>Login</Text></Button>
         </Modal.Footer>
       </Modal>
     </div>
