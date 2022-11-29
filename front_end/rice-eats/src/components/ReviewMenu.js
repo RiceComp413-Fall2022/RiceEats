@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { getIsLoggedIn, getNetId } from '../utils/GlobalVars';
 import ReviewItem from './ReviewItem';
 import { getPageMargin } from '../config/config';
+import { getCurrentMeal } from '../utils/Meals';
 
 export default function ReviewMenu(props) {
   const servery = props.servery;
@@ -42,6 +43,13 @@ export default function ReviewMenu(props) {
     }
 
     // Verify that we are ready to post a review (logged in and rated at least one item)
+    if (dateMeal[0] !== getCurrentMeal()[0]) {
+      console.log(dateMeal);
+      console.log(getCurrentMeal());
+      alert("Can't submit ratings for non current meals!");
+      return;
+    }
+    
     if (localReviews.length === 0) {
       alert("Must provide at least one star rating!");
       return;
