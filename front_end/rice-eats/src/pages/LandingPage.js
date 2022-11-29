@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import { serveryName, serveryUrl, serveryMapUrl, getScreenSize, getPageMargin } from '../config/config';
-import { getOrderedServeryList, setOrderedServeryList } from '../utils/GlobalVars';
+import { getGlobalCurrentMeal, getOrderedServeryList, setOrderedServeryList } from '../utils/GlobalVars';
 import { realRetrieveMenus } from '../utils/APICalls';
-import { getCurrentMeal } from '../utils/Meals';
 
 import { ErrorBoundary } from 'react-error-boundary';
 import ServeryCard from '../components/ServeryCard';
@@ -43,7 +42,19 @@ function ServeryCards(props) {
 export default function LandingPage() {
   const [menus, setMenus] = useState();
   const [serveries, setServeries] = useState(getOrderedServeryList());
-  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+  const [dateMeal, setDateMeal] = useState(getGlobalCurrentMeal());
+  // const [dietaryRestrictions, setDietaryRestrictions] = useState({
+  //   eggs: false,
+  //   fish: false,
+  //   gluten: false,
+  //   milk: false,
+  //   peanuts: false,
+  //   shellfish: false,
+  //   soy: false,
+  //   treeNuts: false,
+  //   vegan: false,
+  //   vegetarian: false
+  // });
 
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]), [setMenus, dateMeal]);
 

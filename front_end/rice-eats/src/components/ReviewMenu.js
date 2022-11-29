@@ -54,8 +54,7 @@ export default function ReviewMenu(props) {
       return;
     }
 
-    PostReview(servery, dateMeal[0], dateMeal[1], netId, localReviews);
-    navigate("/");
+    PostReview(servery, dateMeal[0], dateMeal[1], netId, localReviews, () => navigate("/"));
   };
 
   return (

@@ -17,6 +17,9 @@ import NorthDetails from './pages/NorthDetails';
 import WestDetails from './pages/WestDetails';
 import SeibelDetails from './pages/SeibelDetails';
 import BakerDetails from './pages/BakerDetails';
+import { resetGlobalCurrentMeal } from './utils/GlobalVars';
+
+resetGlobalCurrentMeal();
 
 const router = createBrowserRouter([
   {

@@ -1,4 +1,5 @@
 import { serveryList } from "../config/config";
+import { getCurrentMeal } from "./Meals";
 
 export const getOrderedServeryList = () => {
   try {
@@ -65,3 +66,29 @@ export const setNetId = (netId) => {
       console.log("ERROR in setNetId");
   }
 };
+
+export const getGlobalCurrentMeal = () => {
+  try {
+    const serializedState = localStorage.getItem('currentMeal');
+    if (serializedState == null) {
+        return null;
+    } else {
+        return JSON.parse(serializedState)
+    }
+  } catch (e) {
+      console.log("ERROR in getGlobalCurrentMeal");
+  }
+};
+
+export const setGlobalCurrentMeal = (currentMeal) => {
+  try {
+    const serializedState = JSON.stringify(currentMeal);
+    localStorage.setItem('currentMeal', serializedState);
+  } catch (e) {
+      console.log("ERROR in setCurrentMeal");
+  }
+};
+
+export const resetGlobalCurrentMeal = () => {
+  setGlobalCurrentMeal(getCurrentMeal());
+}

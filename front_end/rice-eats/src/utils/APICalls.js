@@ -1,7 +1,7 @@
 import axios from "axios";
 import { backendUrl } from "../config/config";
 
-export function PostReview(serveryName, date, mealType, netId, itemReviews) {
+export function PostReview(serveryName, date, mealType, netId, itemReviews, callback) {
     // console.log(itemReviews);
     axios.post(backendUrl + "/submitreview", {
         serveryName: serveryName,
@@ -13,7 +13,7 @@ export function PostReview(serveryName, date, mealType, netId, itemReviews) {
         reviewerNumReviews: 1,
         comments: "N/A",
         itemReviews: itemReviews
-    });
+    }).then(callback);
 }
 
 export function realRetrieveMenus(func, date, mealType) {

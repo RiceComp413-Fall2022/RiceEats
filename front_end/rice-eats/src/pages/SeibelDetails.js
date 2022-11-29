@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { realRetrieveMenus } from '../utils/APICalls';
-import { getCurrentMeal } from '../utils/Meals';
 import ReviewMenu from '../components/ReviewMenu';
+import { getGlobalCurrentMeal } from '../utils/GlobalVars';
 
 export default function SeibelDetails() {
   const [menus, setMenus] = useState();
-  const [dateMeal, setDateMeal] = useState(getCurrentMeal());
+  const [dateMeal, setDateMeal] = useState(getGlobalCurrentMeal());
   const seibel_menu = menus?.Seibel;
 
   useEffect(() => {

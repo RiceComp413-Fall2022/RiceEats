@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Text from './Text';
 import Button from "./Button";
 import { getMealString1, getMealString2, getMealString3, getNextMeal, getPrevMeal } from '../utils/Meals';
+import { setGlobalCurrentMeal } from '../utils/GlobalVars';
 
 export default function MealPicker(props) {
   // TODO: make this do something lol
   const dateMeal = props.dateMeal;
-  const setDateMeal = props.setDateMeal;
+  const setDateMeal = (dm) => {
+    setGlobalCurrentMeal(dm);
+    props.setDateMeal(dm);
+  };
   // const [dateMeal, setDateMeal] = useState(getCurrentMeal());
   const [mealString1, setMealString1] = useState("Friday, Dinner");
   const [mealString2, setMealString2] = useState("5:30 PM - 7:30 PM");
