@@ -44,8 +44,6 @@ export default function ReviewMenu(props) {
 
     // Verify that we are ready to post a review (logged in and rated at least one item)
     if (dateMeal[0] !== getCurrentMeal()[0]) {
-      console.log(dateMeal);
-      console.log(getCurrentMeal());
       alert("Can't submit ratings for non current meals!");
       return;
     }
