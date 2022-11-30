@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 export default function Button(props) {
   const children = props.children;
@@ -7,8 +7,9 @@ export default function Button(props) {
   const fullHeight = props.fullHeight ?? false;
   const disableLinkStyling = props.disableLinkStyling ?? false;
   const invisible = props.invisible ?? false;
+  const color = props.color ?? "rgb(251, 131, 134)";
 
-  const computeStyle = () => {
+  const style = useMemo(() => {
     let style = {
       borderRadius: "5px",
       display: "flex",
@@ -28,16 +29,16 @@ export default function Button(props) {
       style = {...style, cursor: "pointer"};
     }
     if (!invisible) {
-      style = {...style, backgroundColor: "rgb(251, 131, 134)"} //"rgb(41, 88, 163)",
+      style = {...style, backgroundColor: color} //"rgb(41, 88, 163)",
     }
     return style;
-  }
+  },[fullHeight, fullWidth, disableLinkStyling, invisible, color]);
 
   const className = invisible ? "hover-background" : "hover-shadow";
 
   return (
     <div 
-    style={computeStyle()} 
+    style={style} 
     onClick={onClick}
     className={className}>
       {children}

@@ -6,6 +6,8 @@ export default function Text(props) {
   const bold = props.bold ?? false;
   const large = props.large ?? false;
   const centerText = props.centerText ?? false;
+  const highlighted = props.highlighted ?? false;
+  const strikethrough = props.strikethrough ?? false;
   
   return (
     <div style={{
@@ -14,9 +16,12 @@ export default function Text(props) {
       color: white ? "white" : "black",
       display: "flex",
       alignItems: "center",
-      textAlign: centerText ? "center" : ""
+      textAlign: centerText ? "center" : "",
+      textDecoration: strikethrough ? "line-through" : ""
     }}>
-      {children}
+      <div style={{backgroundColor: highlighted ? "yellow" : ""}}>
+        {children}
+      </div>
     </div>
   )
 }

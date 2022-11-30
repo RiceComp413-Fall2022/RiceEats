@@ -3,6 +3,7 @@ import Button from "./Button";
 import Card from "./Card";
 import Text from "./Text";
 import { useNavigate } from "react-router-dom";
+import { highlightedDietaryRestrictions, strikethroughDietaryRestrictions } from '../config/config';
 
 export default function ServeryCard(props) {
   const name = props.name;
@@ -13,11 +14,33 @@ export default function ServeryCard(props) {
   const mapUrl = props.mapUrl;
   const moveToTop = props.moveToTop ?? (() => undefined);
   const isTop = props.isTop;
+  const dietaryRestrictions = props.dietaryRestrictions;
 
   const navigate = useNavigate();
   const onButtonClick = () => {
     navigate(url);
-  }
+  };
+
+  const isHighlighted = (menuItem) => {
+    let result = false;
+    console.log(menuItem);
+    highlightedDietaryRestrictions.forEach((restriction) => {
+      if (menuItem[restriction] && dietaryRestrictions[restriction]) {
+        result = true;
+      }
+    });
+    return result;
+  };
+
+  const isStrikethrough = (menuItem) => {
+    let result = false;
+    strikethroughDietaryRestrictions.forEach((restriction) => {
+      if (menuItem[restriction] && dietaryRestrictions[restriction]) {
+        result = true;
+      }
+    });
+    return result;
+  };
 
   return (
     <Card backgroundColor={backgroundColor}>
@@ -33,7 +56,11 @@ export default function ServeryCard(props) {
           </Text>
           {menuItems.map((menuItem, index) => (
             <div key={index}>
-              {menuItem.menuItem_id} ({menuItem.rating !== -1 && <>{menuItem.rating}⭐</>}{menuItem.rating === -1 && <>new!</>})
+              <Text 
+                highlighted={isHighlighted(menuItem)} 
+                strikethrough={isStrikethrough(menuItem)}>
+                {menuItem.menuItem_id} ({menuItem.rating !== -1 && <>{menuItem.rating}⭐</>}{menuItem.rating === -1 && <>new!</>})
+              </Text>
             </div>
           ))}
         </div>

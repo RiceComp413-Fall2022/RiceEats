@@ -29,14 +29,6 @@ export const serveryMapUrl = {
 export const backendUrl = "https://rice-eats-backend.herokuapp.com";
 // export const backendUrl = "http://127.0.0.1:8000";
 
-export const serveryColor = {
-    "South": "rgb(58, 64, 90)",
-    "West": "rgb(174, 197, 235)",
-    "North": "rgb(249, 222, 201)",
-    "Seibel": "rgb(233, 175, 163)",
-    "Baker": "rgb(104, 80, 68)",
-};
-
 export const mealTimes = {
     "Monday": {
         "Breakfast": ["7:30 AM", "10:30 AM"],
@@ -113,6 +105,12 @@ export const availableServeries = {
     },
 };
 
+export const allDietaryRestrictions = ["eggs", "fish", "gluten", "milk", "peanuts", "shellfish", "soy", "treeNuts", "vegan", "vegetarian"];
+
+export const highlightedDietaryRestrictions = ["vegan", "vegetarian"];
+
+export const strikethroughDietaryRestrictions = ["eggs", "fish", "gluten", "milk", "peanuts", "shellfish", "soy", "treeNuts"];
+
 export const getScreenSize = () => {
     if (window.innerWidth > 1600) {
         return "large";
@@ -129,4 +127,4 @@ export const getPageMargin = () => {
     } else {
         return "12%";
     }
-}
+};

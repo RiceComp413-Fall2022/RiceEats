@@ -10,12 +10,14 @@ import TopBar from '../components/TopBar';
 import MealPicker from '../components/MealPicker';
 import NoDataError from '../components/NoDataError';
 import LoadingWheel from '../components/LoadingWheel';
+import DietaryRestrictions from '../components/DietaryRestrictions';
 
 function ServeryCards(props) {
   const gridTemplateColumns = props.gridTemplateColumns;
   const serveries = props.serveries;
   const menus = props.menus;
   const moveServeryToTop = props.moveServeryToTop;
+  const dietaryRestrictions = props.dietaryRestrictions;
 
   return (
     <div style={{
@@ -33,6 +35,7 @@ function ServeryCards(props) {
           mapUrl={serveryMapUrl[servery]}
           moveToTop={() => moveServeryToTop(serveryName[servery])}
           isTop={index === 0}
+          dietaryRestrictions={dietaryRestrictions}
           key={index}/>
       ))}
     </div>
@@ -43,18 +46,18 @@ export default function LandingPage() {
   const [menus, setMenus] = useState();
   const [serveries, setServeries] = useState(getOrderedServeryList());
   const [dateMeal, setDateMeal] = useState(getGlobalCurrentMeal());
-  // const [dietaryRestrictions, setDietaryRestrictions] = useState({
-  //   eggs: false,
-  //   fish: false,
-  //   gluten: false,
-  //   milk: false,
-  //   peanuts: false,
-  //   shellfish: false,
-  //   soy: false,
-  //   treeNuts: false,
-  //   vegan: false,
-  //   vegetarian: false
-  // });
+  const [dietaryRestrictions, setDietaryRestrictions] = useState({
+    eggs: false,
+    fish: false,
+    gluten: false,
+    milk: false,
+    peanuts: false,
+    shellfish: false,
+    soy: false,
+    treeNuts: false,
+    vegan: false,
+    vegetarian: false
+  });
 
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]), [setMenus, dateMeal]);
 
@@ -88,13 +91,21 @@ export default function LandingPage() {
         </div>
       }
       {menus &&
-        <ErrorBoundary FallbackComponent={NoDataError}>
-          <ServeryCards 
-            gridTemplateColumns={gridTemplateColumns} 
-            serveries={serveries} 
-            menus={menus} 
-            moveServeryToTop={moveServeryToTop}/>
-        </ErrorBoundary>
+        <>
+          <ErrorBoundary FallbackComponent={NoDataError}>
+            <ServeryCards 
+              gridTemplateColumns={gridTemplateColumns} 
+              serveries={serveries} 
+              menus={menus} 
+              moveServeryToTop={moveServeryToTop} 
+              dietaryRestrictions={dietaryRestrictions} />
+          </ErrorBoundary>
+          <div style={{marginTop: 30}}>
+            <DietaryRestrictions 
+              dietaryRestrictions={dietaryRestrictions}
+              setDietaryRestrictions={setDietaryRestrictions} />
+          </div>
+        </>
       }
     </div>
   );
