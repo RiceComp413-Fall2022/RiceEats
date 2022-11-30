@@ -28,6 +28,10 @@ export default function ServeryCard(props) {
       if (menuItem[restriction] && dietaryRestrictions[restriction]) {
         result = true;
       }
+      if (menuItem.vegan && dietaryRestrictions.vegetarian) {
+        // Edge case: for some reason they don't mark vegan meals as vegetarian
+        result = true;
+      }
     });
     return result;
   };
