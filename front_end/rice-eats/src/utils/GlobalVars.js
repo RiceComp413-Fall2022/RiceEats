@@ -1,4 +1,4 @@
-import { serveryList } from "../config/config";
+import { allDietaryRestrictions, serveryList } from "../config/config";
 import { getCurrentMeal } from "./Meals";
 
 export const getOrderedServeryList = () => {
@@ -91,4 +91,30 @@ export const setGlobalCurrentMeal = (currentMeal) => {
 
 export const resetGlobalCurrentMeal = () => {
   setGlobalCurrentMeal(getCurrentMeal());
-}
+};
+
+export const getGlobalDietaryRestrictions = () => {
+  try {
+    const serializedState = localStorage.getItem('dietaryRestrictions');
+    if (serializedState == null) {
+      let defaultDietaryRestrictions = {};
+      allDietaryRestrictions.forEach((dietaryRestriction) => {
+        defaultDietaryRestrictions[dietaryRestriction] = false;
+      });
+      return defaultDietaryRestrictions;
+    } else {
+      return JSON.parse(serializedState)
+    }
+  } catch (e) {
+    console.log("ERROR in getGlobalDietaryRestrictions");
+  }
+};
+
+export const setGlobalDietaryRestrictions = (dietaryRestrictions) => {
+  try {
+    const serializedState = JSON.stringify(dietaryRestrictions);
+    localStorage.setItem('dietaryRestrictions', serializedState);
+  } catch (e) {
+      console.log("ERROR in setGlobalDietaryRestrictions");
+  }
+};

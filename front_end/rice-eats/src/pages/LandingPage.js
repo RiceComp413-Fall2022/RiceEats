@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { serveryName, serveryUrl, serveryMapUrl, getScreenSize, getPageMargin } from '../config/config';
-import { getGlobalCurrentMeal, getOrderedServeryList, setOrderedServeryList } from '../utils/GlobalVars';
+import { getGlobalCurrentMeal, getGlobalDietaryRestrictions, getOrderedServeryList, setGlobalDietaryRestrictions, setOrderedServeryList } from '../utils/GlobalVars';
 import { realRetrieveMenus } from '../utils/APICalls';
 
 import { ErrorBoundary } from 'react-error-boundary';
@@ -46,18 +46,7 @@ export default function LandingPage() {
   const [menus, setMenus] = useState();
   const [serveries, setServeries] = useState(getOrderedServeryList());
   const [dateMeal, setDateMeal] = useState(getGlobalCurrentMeal());
-  const [dietaryRestrictions, setDietaryRestrictions] = useState({
-    eggs: false,
-    fish: false,
-    gluten: false,
-    milk: false,
-    peanuts: false,
-    shellfish: false,
-    soy: false,
-    treeNuts: false,
-    vegan: false,
-    vegetarian: false
-  });
+  const [dietaryRestrictions, setDietaryRestrictions] = useState(getGlobalDietaryRestrictions());
 
   useEffect(() => realRetrieveMenus((response) => setMenus(response.data), dateMeal[0], dateMeal[1]), [setMenus, dateMeal]);
 
@@ -103,7 +92,10 @@ export default function LandingPage() {
           <div style={{marginTop: 30}}>
             <DietaryRestrictions 
               dietaryRestrictions={dietaryRestrictions}
-              setDietaryRestrictions={setDietaryRestrictions} />
+              setDietaryRestrictions={(newDietaryRestrictions) => {
+                setGlobalDietaryRestrictions(newDietaryRestrictions);
+                setDietaryRestrictions(newDietaryRestrictions);
+              }} />
           </div>
         </>
       }
