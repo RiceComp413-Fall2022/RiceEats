@@ -85,7 +85,7 @@ export default function ServeryCard(props) {
             <div style={{marginLeft: 5}}>
               <Button onClick={moveToTop}>
                 <Text white bold>
-                  <i className="bi bi-arrow-bar-up" />
+                  <i class="bi bi-bookmark-heart" />
                 </Text>
               </Button>
             </div>
