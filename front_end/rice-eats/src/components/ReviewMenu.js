@@ -68,7 +68,7 @@ export default function ReviewMenu(props) {
     shareText += servery;
     shareText += " " + dateMeal[1];
     shareText += "\n";
-    menu.menuItemDiet.foreach((item) => {
+    menu.menuItemDiet.forEach((item) => {
       shareText += "\n" + item.menuItem_id;
     });
     shareText += "\n\nView the current menu at: https://www.rice-eats.com/";
