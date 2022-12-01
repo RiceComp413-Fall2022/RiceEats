@@ -10,6 +10,7 @@ import { getIsLoggedIn, getNetId } from '../utils/GlobalVars';
 import ReviewItem from './ReviewItem';
 import { getPageMargin } from '../config/config';
 import { getCurrentMeal } from '../utils/Meals';
+import { Snackbar } from '@mui/material';
 
 export default function ReviewMenu(props) {
   const servery = props.servery;
@@ -20,6 +21,7 @@ export default function ReviewMenu(props) {
 
   const [actualReview, setActualReview] = useState();
   const [reviewComments, setReviewComments] = useState();
+  const [copyAlertOpen, setCopyAlertOpen] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,8 +29,6 @@ export default function ReviewMenu(props) {
     setActualReview(new Array(menuLength).fill(null));
     setReviewComments(new Array(menuLength));
   }, [menu, setActualReview, setReviewComments]);
-
-  // useEffect(() => console.log(reviewComments), [reviewComments]);
 
   const postReview = () => {
     let localReviews = [];
@@ -63,6 +63,26 @@ export default function ReviewMenu(props) {
     PostReview(servery, dateMeal[0], dateMeal[1], netId, localReviews, () => navigate("/"));
   };
 
+  const shareMenu = () => {
+    let shareText = "";
+    shareText += servery;
+    shareText += " " + dateMeal[1];
+    shareText += "\n";
+    menu.menuItemDiet.map((item) => {
+      shareText += "\n" + item.menuItem_id;
+    });
+    shareText += "\n\n" + "View the current menu at: https://www.rice-eats.com/";
+    navigator.clipboard.writeText(shareText);
+    setCopyAlertOpen(true);
+    // alert("Menu info copied to clipboard!!");
+  };
+
+  const snackbarAction = (
+    <Button invisible onClick={() => setCopyAlertOpen(false)}>
+      <i className="bi bi-x-circle-fill" />
+    </Button>
+  );
+
   return (
     <>
       {!menu &&
@@ -84,7 +104,7 @@ export default function ReviewMenu(props) {
           
           <div>
             {actualReview && reviewComments && menu.menuItemDiet.map((item, index) => (
-              <div style={{marginBottom: "10px"}}>
+              <div key={index} style={{marginBottom: "10px"}}>
                 <ReviewItem 
                   item={item}
                   index={index}
@@ -96,32 +116,22 @@ export default function ReviewMenu(props) {
             ))}
           </div>
 
-          {/* <div>
-            <Table striped bordered hover>
-              <thead>
-              <tr>
-                <th>Item</th>
-                <th>Current Rating</th>
-                <th>My Rating</th>
-                <th>Comments</th>
-              </tr>
-              </thead>
-              <tbody>
-              {actualReview && reviewComments && menu.menuItemDiet.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.menuItem_id}</td>
-                  <td>{item.rating !== -1 && <>{item.rating}</>}{item.rating === -1 && <>new!</>}</td>
-                  <td><ReviewTextInput index={index} actualReview={actualReview} setActualReview={setActualReview}/></td>
-                  <td><CommentsTextInput index={index} reviewComments={reviewComments} setReviewComments={setReviewComments}/></td>
-                </tr>
-              ))}
-              </tbody>
-            </Table>
-          </div> */}
+          <div style={{marginBottom: 15}}>
+            <Button onClick={postReview}>
+              <Text white bold>Submit</Text>
+            </Button>
+          </div>
 
-          <Button onClick={postReview}>
-            <Text white bold>Submit</Text>
+          <Button onClick={shareMenu}>
+            <Text white bold>Share Menu!   <i className="bi bi-share" /></Text>
           </Button>
+
+          <Snackbar
+            open={copyAlertOpen}
+            autoHideDuration={5000}
+            onClose={() => setCopyAlertOpen(false)}
+            message="Menu info copied to the clipboard"
+            action={snackbarAction} />
         </div>
       }
     </>
