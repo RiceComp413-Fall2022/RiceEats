@@ -71,10 +71,9 @@ export default function ReviewMenu(props) {
     menu.menuItemDiet.forEach((item) => {
       shareText += "\n" + item.menuItem_id;
     });
-    shareText += "\n\nView the current menu at: https://www.rice-eats.com/";
+    shareText += "\n\nView the latest menus at: https://www.rice-eats.com/";
     navigator.clipboard.writeText(shareText);
     setCopyAlertOpen(true);
-    // alert("Menu info copied to clipboard!!");
   };
 
   const snackbarAction = (
