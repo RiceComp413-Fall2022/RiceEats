@@ -68,10 +68,10 @@ export default function ReviewMenu(props) {
     shareText += servery;
     shareText += " " + dateMeal[1];
     shareText += "\n";
-    menu.menuItemDiet.map((item) => {
+    menu.menuItemDiet.foreach((item) => {
       shareText += "\n" + item.menuItem_id;
     });
-    shareText += "\n\n" + "View the current menu at: https://www.rice-eats.com/";
+    shareText += "\n\nView the current menu at: https://www.rice-eats.com/";
     navigator.clipboard.writeText(shareText);
     setCopyAlertOpen(true);
     // alert("Menu info copied to clipboard!!");
