@@ -19,7 +19,7 @@ export default function Text(props) {
       textAlign: centerText ? "center" : "",
       textDecoration: strikethrough ? "line-through" : ""
     }}>
-      <div style={{backgroundColor: highlighted ? "yellow" : ""}}>
+      <div style={{backgroundColor: highlighted ? "#FFE873" : ""}}>
         {children}
       </div>
     </div>
