@@ -6,7 +6,7 @@ bs4==0.0.1
 certifi==2022.9.24
 charset-normalizer==2.1.1
 dj-database-url==1.0.0
-Django==4.1.1
+Django==4.1.7
 django-cors-headers==3.13.0
 djangorestframework==3.13.1
 exceptiongroup==1.0.0rc9
